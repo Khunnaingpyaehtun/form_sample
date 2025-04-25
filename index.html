@@ -9,6 +9,7 @@
       font-family: sans-serif;
       background-color: #f2f2f2;
       padding: 20px;
+      text-align: center;
     }
     .form-container {
       max-width: 700px;
@@ -19,34 +20,37 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
-      text-align: center;
       margin-bottom: 20px;
     }
     label {
       font-weight: bold;
       margin-top: 15px;
       display: block;
+      text-align: center;
     }
     input, select, textarea {
-      width: 100%;
+      width: 90%;
       padding: 10px;
       margin-top: 5px;
       border-radius: 6px;
       border: 1px solid #ccc;
+      text-align: center;
     }
     .checkbox-group, .rating-group {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 5px;
+      margin-top: 10px;
     }
-    .rating-group input {
-      width: auto;
+    .checkbox-group label,
+    .rating-group label {
+      font-weight: normal;
     }
     button {
       margin-top: 20px;
       padding: 12px;
-      width: 100%;
+      width: 90%;
       background-color: #007bff;
       color: white;
       font-weight: bold;
@@ -57,16 +61,12 @@
     button:hover {
       background-color: #0056b3;
     }
-    .hidden {
-      display: none;
-    }
   </style>
 </head>
 <body>
 
-  <!-- Page 1 -->
   <div class="form-container" id="page1">
-    <h2>လိုအပ်ချက်များ ဖြည့်ပါ</h2>
+    <h2>ငလျင်ဒဏ်အတွက် Need Assessment</h2>
 
     <!-- Hidden GPS -->
     <input type="hidden" id="latitude" name="latitude">
@@ -96,42 +96,10 @@
     <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
 
     <button onclick="submitPage1()">ပေးပို့မည်</button>
-    <button type="button" onclick="gotoPage2()">Community Info ဖြည့်ချင်ပါတယ်</button>
+    <button type="button" onclick="gotoKoBo()">Community Info ဖြည့်ချင်ပါတယ်</button>
   </div>
 
-  <!-- Page 2 -->
-  <div class="form-container hidden" id="page2">
-    <h2>Community Info (အကူအညီအတွက် အသေးစိတ်)</h2>
-
-    <label for="name">အမည်</label>
-    <input type="text" id="name" name="name">
-
-    <label for="location">နေရာ (မြို့/ရွာ)</label>
-    <input type="text" id="location" name="location">
-
-    <label for="people">လူဦးရေ</label>
-    <input type="number" id="people" name="people" min="1">
-
-    <label for="gender">ကျား/မ</label>
-    <select id="gender" name="gender">
-      <option value="">-- ရွေးချယ်ပါ --</option>
-      <option value="ကျား">ကျား</option>
-      <option value="မ">မ</option>
-      <option value="အခြား">အခြား</option>
-    </select>
-
-    <label for="house_damage">အိမ်ပြုတ်ကျမှုအခြေအနေ</label>
-    <select id="house_damage" name="house_damage">
-      <option value="">-- ရွေးချယ်ပါ --</option>
-      <option value="မပြုတ်ကျပါ">မပြုတ်ကျပါ</option>
-      <option value="အချို့ပြုတ်ကျ">အချို့ပြုတ်ကျ</option>
-      <option value="လုံးဝပြုတ်ကျ">လုံးဝပြုတ်ကျ</option>
-    </select>
-
-    <button onclick="submitFullForm()">အကုန်ပြီးသွားပါပြီ</button>
-  </div>
-
-  <!-- JS: VPN Detect + GPS + Page Switching -->
+  <!-- JS: VPN Detect + GPS + Page Navigation -->
   <script>
     // VPN Detect
     fetch("https://ipapi.co/json/")
@@ -163,20 +131,15 @@
       }
     };
 
-    // Page navigation
-    function gotoPage2() {
-      document.getElementById("page1").classList.add("hidden");
-      document.getElementById("page2").classList.remove("hidden");
-    }
-
+    // Action for Page 1 Submit
     function submitPage1() {
       alert("အထက်ပါအချက်အလက်များ ပေးပို့သွားပါပြီ။");
-      // Here you can post the data to your endpoint
+      // Optional: you can POST the data somewhere here
     }
 
-    function submitFullForm() {
-      alert("Community Info ထည့်ပြီး Submit ပြီးပါပြီ။");
-      // Full submission can be handled here
+    // Go to KoBo form
+    function gotoKoBo() {
+      window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
     }
   </script>
 </body>
