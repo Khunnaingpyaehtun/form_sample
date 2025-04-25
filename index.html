@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Earthquake Need Assessment</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Need Assessment Form</title>
   <style>
     body {
       font-family: sans-serif;
@@ -40,17 +40,38 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
-    .checkbox-group {
+    .fancy-checkbox-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 10px;
       margin-top: 10px;
     }
-    .checkbox-group label {
+    .fancy-option {
+      position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      font-weight: normal;
+      justify-content: center;
+      background-color: #f1f1f1;
+      border: 2px solid transparent;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 120px;
+      text-align: center;
+    }
+    .fancy-option input[type="checkbox"] {
+      display: none;
+    }
+    .fancy-option input[type="checkbox"]:checked + span {
+      background-color: #007bff;
+      color: white;
+      border-radius: 6px;
+    }
+    .fancy-option span {
+      display: inline-block;
+      padding: 4px 8px;
     }
     .rating-group {
       display: block;
@@ -86,131 +107,53 @@
     button:hover {
       background-color: #0056b3;
     }
-
-    /* Tiny redirect icon button */
-    .tiny-redirect-btn {
-      flex: 0;
-      padding: 6px 10px;
-      font-size: 16px;
-      border-radius: 50%;
-      width: 36px;
-      height: 36px;
-      background-color: #ff6347;
-      color: white;
-      position: relative;
-    }
-
-    .tiny-redirect-btn:hover {
-      background-color: #d93f28;
-    }
-
-    .tiny-redirect-btn::after {
-      content: attr(data-tooltip);
-      visibility: hidden;
-      opacity: 0;
-      background-color: #333;
-      color: #fff;
-      padding: 6px 10px;
-      border-radius: 4px;
-      position: absolute;
-      bottom: 110%;
-      left: 50%;
-      transform: translateX(-50%);
-      white-space: nowrap;
-      font-size: 13px;
-      transition: opacity 0.2s;
-      z-index: 2;
-    }
-
-    .tiny-redirect-btn:hover::after {
-      visibility: visible;
-      opacity: 1;
-    }
   </style>
 </head>
 <body>
-
   <div class="form-container">
     <h2>ငလျင်ဒဏ်အတွက် Need Assessment</h2>
-
-    <!-- Hidden GPS -->
     <input type="hidden" id="latitude" name="latitude">
     <input type="hidden" id="longitude" name="longitude">
-
-    <!-- Step 1 -->
-    <div class="form-step active" id="step1">
-      <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-      <div class="checkbox-group">
-        <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ">စားနပ်ရိက္ခာ</label>
-        <label><input type="checkbox" name="needs[]" value="ရေ">ရေ</label>
-        <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေး">ဆေးဝါးနှင့် ကျန်းမာရေး</label>
-        <label><input type="checkbox" name="needs[]" value="ငွေကြေး">ငွေကြေး</label>
-        <label><input type="checkbox" name="needs[]" value="အမိုးအကာ">အမိုးအကာ</label>
+    <form id="needForm">
+      <div class="form-step active" id="step1">
+        <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+        <div class="fancy-checkbox-group">
+          <label class="fancy-option"><input type="checkbox" name="needs" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
+          <label class="fancy-option"><input type="checkbox" name="needs" value="ရေ"><span>ရေ</span></label>
+          <label class="fancy-option"><input type="checkbox" name="needs" value="ဆေးဝါးနှင့် ကျန်းမာရေး"><span>ဆေးဝါးနှင့် ကျန်းမာရေး</span></label>
+          <label class="fancy-option"><input type="checkbox" name="needs" value="ငွေကြေး"><span>ငွေကြေး</span></label>
+          <label class="fancy-option"><input type="checkbox" name="needs" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
+        </div>
+        <div class="button-group">
+          <span></span>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
       </div>
-      <div class="button-group">
-        <span></span>
-        <button type="button" onclick="nextStep()">Next</button>
+      <div class="form-step" id="step2">
+        <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
+        <div class="rating-group">
+          <label><input type="radio" name="situation" value="1"> ၁</label>
+          <label><input type="radio" name="situation" value="2"> ၂</label>
+          <label><input type="radio" name="situation" value="3"> ၃</label>
+          <label><input type="radio" name="situation" value="4"> ၄</label>
+          <label><input type="radio" name="situation" value="5"> ၅</label>
+        </div>
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="button" onclick="nextStep()">Next</button>
+        </div>
       </div>
-    </div>
-
-    <!-- Step 2 -->
-    <div class="form-step" id="step2">
-      <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
-      <div class="rating-group">
-        <label><input type="radio" name="situation" value="1"> ၁ - အလွန်ဆိုး</label>
-        <label><input type="radio" name="situation" value="2"> ၂ - ဆိုး</label>
-        <label><input type="radio" name="situation" value="3"> ၃ - မျှတ</label>
-        <label><input type="radio" name="situation" value="4"> ၄ - ကောင်း</label>
-        <label><input type="radio" name="situation" value="5"> ၅ - အလွန်ကောင်း</label>
+      <div class="form-step" id="step3">
+        <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+        <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
+        <div class="button-group">
+          <button type="button" onclick="prevStep()">Back</button>
+          <button type="submit">Submit</button>
+        </div>
       </div>
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
-    </div>
-
-    <!-- Step 3 -->
-    <div class="form-step" id="step3">
-      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-      <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button onclick="submitForm()">Submit</button>
-
-        <!-- Tiny Redirect Button with Tooltip -->
-        <button class="tiny-redirect-btn" onclick="gotoKoBo()" data-tooltip="Community Info ဖြည့်မယ်">!</button>
-      </div>
-    </div>
+    </form>
   </div>
-
-  <!-- Script -->
   <script>
-    // VPN Detect
-    fetch("https://ipapi.co/json/")
-      .then(response => response.json())
-      .then(data => {
-        const allowedCountries = ["Myanmar", "Thailand"];
-        if (!allowedCountries.includes(data.country_name)) {
-          alert("VPN သုံးနေပါသည်။ VPN ပိတ်ပြီး ပြန်ဝင်ပါ။");
-          window.location.href = "https://google.com";
-        }
-      })
-      .catch(err => console.error("VPN Check Failed:", err));
-
-    // GPS
-    window.onload = function () {
-      if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(
-          pos => {
-            document.getElementById("latitude").value = pos.coords.latitude;
-            document.getElementById("longitude").value = pos.coords.longitude;
-          },
-          err => console.error("GPS Error:", err)
-        );
-      }
-    };
-
-    // Step Navigation
     let currentStep = 1;
     function showStep(step) {
       document.querySelectorAll('.form-step').forEach((el, idx) => {
@@ -218,22 +161,31 @@
       });
       currentStep = step;
     }
-
     function nextStep() {
       if (currentStep < 3) showStep(currentStep + 1);
     }
-
     function prevStep() {
       if (currentStep > 1) showStep(currentStep - 1);
     }
 
-    function submitForm() {
-      alert("Form ကိုအောင်မြင်စွာ ပေးပို့ပြီးပါပြီ။");
-    }
+    document.getElementById('needForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const needs = Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(el => el.value).join(', ');
+      const situation = document.querySelector('input[name="situation"]:checked')?.value || '';
+      const detail = document.getElementById('detail').value;
 
-    function gotoKoBo() {
-      window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
-    }
+      fetch('https://ee.kobotoolbox.org/submissions?format=json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          "data": {
+            "needs": needs,
+            "situation": situation,
+            "detail": detail
+          }
+        })
+      }).then(() => alert("ပေးပို့ပြီးပါပြီ")).catch(() => alert("ပေးပို့မှုမအောင်မြင်ပါ"));
+    });
   </script>
 </body>
 </html>
