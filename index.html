@@ -2,24 +2,31 @@
 <html lang="my">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Need Assessment Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Earthquake Relief Assessment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
       padding: 40px 20px;
+      margin: 0;
     }
     .form-container {
-      max-width: 600px;
+      max-width: 640px;
       margin: auto;
-      background: #fff;
+      background: #ffffff;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      transition: 0.3s ease;
     }
     h2 {
-      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 30px;
     }
     .form-step {
       display: none;
@@ -28,164 +35,217 @@
       display: block;
     }
     label {
+      font-weight: 600;
+      margin: 15px 0 8px;
       display: block;
-      font-weight: bold;
-      margin: 15px 0 5px;
-      text-align: left;
+      color: #333;
     }
     input, select, textarea {
       width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
+      padding: 12px;
+      margin-bottom: 20px;
       border: 1px solid #ccc;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: vertical;
     }
     .fancy-checkbox-group {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
     }
     .fancy-option {
-      position: relative;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      background-color: #f1f1f1;
-      border: 2px solid transparent;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 14px;
+      background-color: #f0f0f0;
+      border-radius: 12px;
+      padding: 10px 18px;
       cursor: pointer;
-      transition: 0.2s;
-      min-width: 120px;
-      text-align: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .fancy-option:hover {
+      transform: translateY(-1px);
+      background-color: #e0e0e0;
     }
     .fancy-option input[type="checkbox"] {
       display: none;
+    }
+    .fancy-option span {
+      padding: 4px 8px;
+      font-size: 14px;
     }
     .fancy-option input[type="checkbox"]:checked + span {
       background-color: #007bff;
       color: white;
       border-radius: 6px;
-    }
-    .fancy-option span {
-      display: inline-block;
-      padding: 4px 8px;
-    }
-    .rating-group {
-      display: block;
-      margin-top: 10px;
-      text-align: left;
+      padding: 4px 12px;
     }
     .rating-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: normal;
-    }
+  font-weight: normal;
+  background: #f8f9fa;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.2s, border 0.2s;
+}
+.rating-group label:hover {
+  background-color: #e9ecef;
+  border-color: #007bff;
+}
     .rating-group input {
-      width: auto;
-    }
+  margin-right: 6px;
+}
     .button-group {
       display: flex;
       justify-content: space-between;
-      margin-top: 20px;
-      flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
     }
     button {
       flex: 1;
-      padding: 10px 20px;
+      padding: 12px;
       background-color: #007bff;
       color: white;
       font-weight: bold;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      font-size: 15px;
       cursor: pointer;
+      transition: background 0.2s;
     }
     button:hover {
       background-color: #0056b3;
     }
+    .tiny-redirect-btn {
+      flex: 0 0 auto;
+      padding: 6px;
+      font-size: 16px;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      background-color: #ff6347;
+      color: white;
+      position: relative;
+    }
+    .tiny-redirect-btn:hover {
+      background-color: #d93f28;
+    }
+    .tiny-redirect-btn::after {
+      content: attr(data-tooltip);
+      visibility: hidden;
+      opacity: 0;
+      background-color: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 13px;
+      transition: opacity 0.2s;
+      z-index: 2;
+    }
+    .tiny-redirect-btn:hover::after {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h2>ငလျင်ဒဏ်အတွက် Need Assessment</h2>
-    <input type="hidden" id="latitude" name="latitude">
-    <input type="hidden" id="longitude" name="longitude">
-    <form id="needForm">
-      <div class="form-step active" id="step1">
-        <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-        <div class="fancy-checkbox-group">
-          <label class="fancy-option"><input type="checkbox" name="needs" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
-          <label class="fancy-option"><input type="checkbox" name="needs" value="ရေ"><span>ရေ</span></label>
-          <label class="fancy-option"><input type="checkbox" name="needs" value="ဆေးဝါးနှင့် ကျန်းမာရေး"><span>ဆေးဝါးနှင့် ကျန်းမာရေး</span></label>
-          <label class="fancy-option"><input type="checkbox" name="needs" value="ငွေကြေး"><span>ငွေကြေး</span></label>
-          <label class="fancy-option"><input type="checkbox" name="needs" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
-        </div>
-        <div class="button-group">
-          <span></span>
-          <button type="button" onclick="nextStep()">Next</button>
-        </div>
+<div class="form-container">
+  <h2>Smart Earthquake Relief Assessment</h2>
+  <form id="needForm">
+    <div class="form-step active" id="step1">
+      <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+      <div class="fancy-checkbox-group">
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေး"><span>ဆေးဝါးနှင့် ကျန်းမာရေး</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
       </div>
-      <div class="form-step" id="step2">
-        <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
-        <div class="rating-group">
-          <label><input type="radio" name="situation" value="1"> ၁</label>
-          <label><input type="radio" name="situation" value="2"> ၂</label>
-          <label><input type="radio" name="situation" value="3"> ၃</label>
-          <label><input type="radio" name="situation" value="4"> ၄</label>
-          <label><input type="radio" name="situation" value="5"> ၅</label>
-        </div>
-        <div class="button-group">
-          <button type="button" onclick="prevStep()">Back</button>
-          <button type="button" onclick="nextStep()">Next</button>
-        </div>
+      <div class="button-group">
+        <span></span>
+        <button type="button" onclick="nextStep()">Next</button>
       </div>
-      <div class="form-step" id="step3">
-        <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-        <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
-        <div class="button-group">
-          <button type="button" onclick="prevStep()">Back</button>
-          <button type="submit">Submit</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  <script>
-    let currentStep = 1;
-    function showStep(step) {
-      document.querySelectorAll('.form-step').forEach((el, idx) => {
-        el.classList.toggle('active', idx === step - 1);
-      });
-      currentStep = step;
-    }
-    function nextStep() {
-      if (currentStep < 3) showStep(currentStep + 1);
-    }
-    function prevStep() {
-      if (currentStep > 1) showStep(currentStep - 1);
-    }
+    </div>
 
-    document.getElementById('needForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const needs = Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(el => el.value).join(', ');
-      const situation = document.querySelector('input[name="situation"]:checked')?.value || '';
-      const detail = document.getElementById('detail').value;
+    <div class="form-step" id="step2">  
+      <label for="situation">လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
+<select name="situation" id="situation">
+  <option value="">ရွေးချယ်ပါ...</option>
+  <option value="1">၁ - အလွန်ဆိုး</option>
+  <option value="2">၂ - ဆိုး</option>
+  <option value="3">၃ - မျှတ</option>
+  <option value="4">၄ - ကောင်း</option>
+  <option value="5">၅ - အလွန်ကောင်း</option>
+</select>
+      <div class="button-group">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
+    </div>
 
-      fetch('https://ee.kobotoolbox.org/submissions?format=json', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          "data": {
-            "needs": needs,
-            "situation": situation,
-            "detail": detail
-          }
-        })
-      }).then(() => alert("ပေးပို့ပြီးပါပြီ")).catch(() => alert("ပေးပို့မှုမအောင်မြင်ပါ"));
+    <div class="form-step" id="step3">
+      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+      <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
+      <div class="button-group">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="submit">Submit</button>
+        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()" data-tooltip="Community Info ဖြည့်မယ်">!</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script>
+  let currentStep = 1;
+  function showStep(step) {
+    document.querySelectorAll('.form-step').forEach((el, idx) => {
+      el.classList.toggle('active', idx === step - 1);
     });
-  </script>
-</body>
-</html>
+    currentStep = step;
+  }
+  function nextStep() {
+    if (currentStep < 3) showStep(currentStep + 1);
+  }
+  function prevStep() {
+    if (currentStep > 1) showStep(currentStep - 1);
+  }
+
+  function submitFormData(data) {
+    fetch("https://ee.kobotoolbox.org/submissions?format=json", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.ok ? alert("ပေးပို့ပြီးပါပြီ။") : alert("အမှားအယွင်းရှိနေပါတယ်"))
+    .catch(() => alert("ပေးပို့မှုမအောင်မြင်ပါ။"));
+  }
+
+  document.getElementById("needForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
+    const situation = document.querySelector("input[name='situation']:checked")?.value || "";
+    const detail = document.getElementById("detail").value;
+
+    const formData = {
+      data: {
+        needs: needs.join(", "),
+        situation: situation,
+        detail: detail
+      }
+    };
+    submitFormData(formData);
+  });
+
+  function gotoKoBo() {
+    window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
+  }
+</script>
