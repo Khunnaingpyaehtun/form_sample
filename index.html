@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Earthquake Need Assessment</title>
   <style>
     body {
@@ -10,10 +10,10 @@
       background-color: #f2f2f2;
       padding: 20px;
     }
-    form {
+    .form-container {
       max-width: 700px;
       margin: auto;
-      background: #fff;
+      background: white;
       padding: 25px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -34,17 +34,9 @@
       border-radius: 6px;
       border: 1px solid #ccc;
     }
-    .checkbox-group {
+    .checkbox-group, .rating-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 5px;
-    }
-    .checkbox-group label {
-      font-weight: normal;
-    }
-    .rating-group {
-      display: flex;
       gap: 10px;
       margin-top: 5px;
     }
@@ -65,13 +57,18 @@
     button:hover {
       background-color: #0056b3;
     }
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <form action="#" method="POST">
-    <h2>ငလျင်ဒဏ်အတွက် Need Assessment Form</h2>
 
-    <!-- Device Location -->
+  <!-- Page 1 -->
+  <div class="form-container" id="page1">
+    <h2>လိုအပ်ချက်များ ဖြည့်ပါ</h2>
+
+    <!-- Hidden GPS -->
     <input type="hidden" id="latitude" name="latitude">
     <input type="hidden" id="longitude" name="longitude">
 
@@ -82,7 +79,7 @@
       <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
       <label><input type="checkbox" name="needs[]" value="ဆေးဝါး"> ဆေးဝါး</label>
       <label><input type="checkbox" name="needs[]" value="ပိုက်ဆံ"> ပိုက်ဆံ</label>
-      <label><input type="checkbox" name="needs[]" value="အိပ်ရာ/ထောက်ခံမှု"> အိပ်ရာ/ထောက်ခံမှု</label>
+      <label><input type="checkbox" name="needs[]" value="အိပ်ရာ"> အိပ်ရာ</label>
     </div>
 
     <!-- Situation Rating -->
@@ -95,21 +92,25 @@
       <label><input type="radio" name="situation" value="5"> 5</label>
     </div>
 
-    <!-- Additional Details -->
     <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-    <textarea id="detail" name="detail" rows="4" placeholder="လိုအပ်တဲ့အကြောင်းအရာ၊ မျှော်လင့်ချက်..."></textarea>
+    <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
 
-    <hr style="margin: 25px 0;">
+    <button onclick="submitPage1()">ပေးပို့မည်</button>
+    <button type="button" onclick="gotoPage2()">Community Info ဖြည့်ချင်ပါတယ်</button>
+  </div>
 
-    <!-- Community Info -->
+  <!-- Page 2 -->
+  <div class="form-container hidden" id="page2">
+    <h2>Community Info (အကူအညီအတွက် အသေးစိတ်)</h2>
+
     <label for="name">အမည်</label>
-    <input type="text" id="name" name="name" required>
+    <input type="text" id="name" name="name">
 
     <label for="location">နေရာ (မြို့/ရွာ)</label>
-    <input type="text" id="location" name="location" required>
+    <input type="text" id="location" name="location">
 
     <label for="people">လူဦးရေ</label>
-    <input type="number" id="people" name="people" min="1" required>
+    <input type="number" id="people" name="people" min="1">
 
     <label for="gender">ကျား/မ</label>
     <select id="gender" name="gender">
@@ -120,34 +121,63 @@
     </select>
 
     <label for="house_damage">အိမ်ပြုတ်ကျမှုအခြေအနေ</label>
-    <select id="house_damage" name="house_damage" required>
+    <select id="house_damage" name="house_damage">
       <option value="">-- ရွေးချယ်ပါ --</option>
       <option value="မပြုတ်ကျပါ">မပြုတ်ကျပါ</option>
       <option value="အချို့ပြုတ်ကျ">အချို့ပြုတ်ကျ</option>
       <option value="လုံးဝပြုတ်ကျ">လုံးဝပြုတ်ကျ</option>
     </select>
 
-    <button type="submit">ပေးပို့မည်</button>
-  </form>
+    <button onclick="submitFullForm()">အကုန်ပြီးသွားပါပြီ</button>
+  </div>
 
-  <!-- JavaScript for location -->
+  <!-- JS: VPN Detect + GPS + Page Switching -->
   <script>
+    // VPN Detect
+    fetch("https://ipapi.co/json/")
+      .then(response => response.json())
+      .then(data => {
+        const allowedCountries = ["Myanmar", "Thailand"];
+        if (!allowedCountries.includes(data.country_name)) {
+          alert("VPN သုံးနေပါသည်။ မေးလွှာဖြည့်ရန်အတွက် VPN ကိုပိတ်ပြီး ပြန်ဝင်ပါ။");
+          window.location.href = "https://www.google.com";
+        }
+      })
+      .catch(err => {
+        console.error("VPN check failed:", err);
+      });
+
+    // GPS Fetch
     window.onload = function () {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           function (position) {
             document.getElementById("latitude").value = position.coords.latitude;
             document.getElementById("longitude").value = position.coords.longitude;
-            console.log("📍 Location found:", position.coords.latitude, position.coords.longitude);
+            console.log("GPS:", position.coords.latitude, position.coords.longitude);
           },
           function (error) {
-            console.error("🚫 Location error:", error.message);
+            console.error("GPS Error:", error.message);
           }
         );
-      } else {
-        console.error("📵 Geolocation not supported.");
       }
     };
+
+    // Page navigation
+    function gotoPage2() {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
+    }
+
+    function submitPage1() {
+      alert("အထက်ပါအချက်အလက်များ ပေးပို့သွားပါပြီ။");
+      // Here you can post the data to your endpoint
+    }
+
+    function submitFullForm() {
+      alert("Community Info ထည့်ပြီး Submit ပြီးပါပြီ။");
+      // Full submission can be handled here
+    }
   </script>
 </body>
 </html>
