@@ -31,6 +31,7 @@
       display: block;
       font-weight: bold;
       margin: 15px 0 5px;
+      text-align: left;
     }
     input, select, textarea {
       width: 100%;
@@ -40,10 +41,15 @@
       border-radius: 6px;
     }
     .checkbox-group, .rating-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+      display: block;
       margin-top: 10px;
+      text-align: left;
+    }
+    .checkbox-group label,
+    .rating-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: normal;
     }
     .rating-group input {
       width: auto;
@@ -83,11 +89,11 @@
     <div class="form-step active" id="step1">
       <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"> စားနပ်ရိက္ခာ </label><br>
-        <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label><br>
-        <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေးစောင့််ရှောက်မှု#"> ဆေးဝါးနှင့် ကျန်းမာရေးစောင့််ရှောက်မှု</label><br>
-        <label><input type="checkbox" name="needs[]" value="ငွေကြေး."> ငွေကြေး</label><br>
-        <label><input type="checkbox" name="needs[]" value="အမိုးအကာ"> အမိုးအကာ</label><br>
+        <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"> စားနပ်ရိက္ခာ</label>
+        <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
+        <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေးစောင့်ရှောက်မှု"> ဆေးဝါးနှင့် ကျန်းမာရေးစောင့်ရှောက်မှု</label>
+        <label><input type="checkbox" name="needs[]" value="ငွေကြေး"> ငွေကြေး</label>
+        <label><input type="checkbox" name="needs[]" value="အမိုးအကာ"> အမိုးအကာ</label>
       </div>
       <div class="button-group">
         <span></span>
@@ -99,11 +105,11 @@
     <div class="form-step" id="step2">
       <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
       <div class="rating-group">
-        <label><input type="radio" name="situation" value="1"> 1</label>
-        <label><input type="radio" name="situation" value="2"> 2</label>
-        <label><input type="radio" name="situation" value="3"> 3</label>
-        <label><input type="radio" name="situation" value="4"> 4</label>
-        <label><input type="radio" name="situation" value="5"> 5</label>
+        <label><input type="radio" name="situation" value="1"> ၁ - အလွန်ဆိုး</label>
+        <label><input type="radio" name="situation" value="2"> ၂ - ဆိုး</label>
+        <label><input type="radio" name="situation" value="3"> ၃ - မျှတ</label>
+        <label><input type="radio" name="situation" value="4"> ၄ - ကောင်း</label>
+        <label><input type="radio" name="situation" value="5"> ၅ - အလွန်ကောင်း</label>
       </div>
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
@@ -113,7 +119,7 @@
 
     <!-- Step 3 -->
     <div class="form-step" id="step3">
-      <label for="detail">အသေးစိတ် ပြောပြလိုသည်များ</label>
+      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
       <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
@@ -169,7 +175,7 @@
 
     function submitForm() {
       alert("Form ကိုအောင်မြင်စွာ ပေးပို့ပြီးပါပြီ။");
-      // Here you can POST the data or save
+      // POST logic or storage logic here
     }
 
     function gotoKoBo() {
