@@ -52,11 +52,15 @@
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     button {
+      flex: 1;
       padding: 10px 20px;
       background-color: #007bff;
       color: white;
+      font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -113,7 +117,8 @@
       <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
-        <button type="button" onclick="submitForm()">ပေးပို့မည်</button>
+        <button onclick="submitForm()">Submit</button>
+        <button onclick="gotoKoBo()">Community Info ဖြည့်မယ်</button>
       </div>
     </div>
   </div>
@@ -163,7 +168,11 @@
     }
 
     function submitForm() {
-      alert("Form submitted! Community Info ပြည့်စုံဖြည့်ချင်ပါက ဆက်လက်ဖြည့်နိုင်ပါသည်။");
+      alert("Form ကိုအောင်မြင်စွာ ပေးပို့ပြီးပါပြီ။");
+      // Here you can POST the data or save
+    }
+
+    function gotoKoBo() {
       window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
     }
   </script>
