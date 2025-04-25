@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Need Assessment</title>
+  <title>Earthquake Need Assessment</title>
   <style>
     body {
       font-family: sans-serif;
@@ -40,12 +40,23 @@
       border: 1px solid #ccc;
       border-radius: 6px;
     }
-    .checkbox-group, .rating-group {
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    .checkbox-group label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: normal;
+    }
+    .rating-group {
       display: block;
       margin-top: 10px;
       text-align: left;
     }
-    .checkbox-group label,
     .rating-group label {
       display: block;
       margin-bottom: 8px;
@@ -60,6 +71,7 @@
       margin-top: 20px;
       flex-wrap: wrap;
       gap: 10px;
+      align-items: center;
     }
     button {
       flex: 1;
@@ -74,12 +86,52 @@
     button:hover {
       background-color: #0056b3;
     }
+
+    /* Tiny redirect icon button */
+    .tiny-redirect-btn {
+      flex: 0;
+      padding: 6px 10px;
+      font-size: 16px;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      background-color: #ff6347;
+      color: white;
+      position: relative;
+    }
+
+    .tiny-redirect-btn:hover {
+      background-color: #d93f28;
+    }
+
+    .tiny-redirect-btn::after {
+      content: attr(data-tooltip);
+      visibility: hidden;
+      opacity: 0;
+      background-color: #333;
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 4px;
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 13px;
+      transition: opacity 0.2s;
+      z-index: 2;
+    }
+
+    .tiny-redirect-btn:hover::after {
+      visibility: visible;
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
 
   <div class="form-container">
-    <h2>Need Assessment</h2>
+    <h2>ငလျင်ဒဏ်အတွက် Need Assessment</h2>
 
     <!-- Hidden GPS -->
     <input type="hidden" id="latitude" name="latitude">
@@ -89,11 +141,11 @@
     <div class="form-step active" id="step1">
       <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
       <div class="checkbox-group">
-        <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"> စားနပ်ရိက္ခာ</label>
-        <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
-        <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေးစောင့်ရှောက်မှု"> ဆေးဝါးနှင့် ကျန်းမာရေးစောင့်ရှောက်မှု</label>
-        <label><input type="checkbox" name="needs[]" value="ငွေကြေး"> ငွေကြေး</label>
-        <label><input type="checkbox" name="needs[]" value="အမိုးအကာ"> အမိုးအကာ</label>
+        <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ">စားနပ်ရိက္ခာ</label>
+        <label><input type="checkbox" name="needs[]" value="ရေ">ရေ</label>
+        <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့် ကျန်းမာရေး">ဆေးဝါးနှင့် ကျန်းမာရေး</label>
+        <label><input type="checkbox" name="needs[]" value="ငွေကြေး">ငွေကြေး</label>
+        <label><input type="checkbox" name="needs[]" value="အမိုးအကာ">အမိုးအကာ</label>
       </div>
       <div class="button-group">
         <span></span>
@@ -124,7 +176,9 @@
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
         <button onclick="submitForm()">Submit</button>
-        <button onclick="gotoKoBo()">Community Info ဖြည့်မယ်</button>
+
+        <!-- Tiny Redirect Button with Tooltip -->
+        <button class="tiny-redirect-btn" onclick="gotoKoBo()" data-tooltip="Community Info ဖြည့်မယ်">!</button>
       </div>
     </div>
   </div>
@@ -137,7 +191,7 @@
       .then(data => {
         const allowedCountries = ["Myanmar", "Thailand"];
         if (!allowedCountries.includes(data.country_name)) {
-          alert("VPN သုံးနေပါသည်။ VPN ပိတ်ပြီး ပြန််လည်ဖြေဆိုပေးပါ။");
+          alert("VPN သုံးနေပါသည်။ VPN ပိတ်ပြီး ပြန်ဝင်ပါ။");
           window.location.href = "https://google.com";
         }
       })
@@ -175,7 +229,6 @@
 
     function submitForm() {
       alert("Form ကိုအောင်မြင်စွာ ပေးပို့ပြီးပါပြီ။");
-      // POST logic or storage logic here
     }
 
     function gotoKoBo() {
