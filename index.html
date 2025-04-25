@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Earthquake Need Assessment</title>
   <style>
     body {
       font-family: sans-serif;
-      background-color: #f2f2f2;
-      padding: 20px;
-      text-align: center;
+      background-color: #f4f4f4;
+      padding: 40px 20px;
     }
     .form-container {
-      max-width: 700px;
+      max-width: 600px;
       margin: auto;
-      background: white;
-      padding: 25px;
+      background: #fff;
+      padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     h2 {
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .form-step {
+      display: none;
+    }
+    .form-step.active {
+      display: block;
     }
     label {
-      font-weight: bold;
-      margin-top: 15px;
       display: block;
-      text-align: center;
+      font-weight: bold;
+      margin: 15px 0 5px;
     }
     input, select, textarea {
-      width: 90%;
+      width: 100%;
       padding: 10px;
-      margin-top: 5px;
-      border-radius: 6px;
+      margin-bottom: 15px;
       border: 1px solid #ccc;
-      text-align: center;
+      border-radius: 6px;
     }
     .checkbox-group, .rating-group {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 15px;
       margin-top: 10px;
     }
-    .checkbox-group label,
-    .rating-group label {
-      font-weight: normal;
+    .rating-group input {
+      width: auto;
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
     }
     button {
-      margin-top: 20px;
-      padding: 12px;
-      width: 90%;
+      padding: 10px 20px;
       background-color: #007bff;
       color: white;
-      font-weight: bold;
       border: none;
       border-radius: 6px;
       cursor: pointer;
@@ -65,41 +68,57 @@
 </head>
 <body>
 
-  <div class="form-container" id="page1">
-    <h2>ငလျင်ဒဏ်အတွက် Need Assessment</h2>
+  <div class="form-container">
+    <h2>Earthquake Need Assessment</h2>
 
     <!-- Hidden GPS -->
     <input type="hidden" id="latitude" name="latitude">
     <input type="hidden" id="longitude" name="longitude">
 
-    <!-- Type of Need -->
-    <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-    <div class="checkbox-group">
-      <label><input type="checkbox" name="needs[]" value="အစာ"> အစာ</label>
-      <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
-      <label><input type="checkbox" name="needs[]" value="ဆေးဝါး"> ဆေးဝါး</label>
-      <label><input type="checkbox" name="needs[]" value="ပိုက်ဆံ"> ပိုက်ဆံ</label>
-      <label><input type="checkbox" name="needs[]" value="အိပ်ရာ"> အိပ်ရာ</label>
+    <!-- Step 1 -->
+    <div class="form-step active" id="step1">
+      <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="needs[]" value="အစာ"> အစာ</label>
+        <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
+        <label><input type="checkbox" name="needs[]" value="ဆေးဝါး"> ဆေးဝါး</label>
+        <label><input type="checkbox" name="needs[]" value="ပိုက်ဆံ"> ပိုက်ဆံ</label>
+        <label><input type="checkbox" name="needs[]" value="အိပ်ရာ"> အိပ်ရာ</label>
+      </div>
+      <div class="button-group">
+        <span></span>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
     </div>
 
-    <!-- Situation Rating -->
-    <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
-    <div class="rating-group">
-      <label><input type="radio" name="situation" value="1"> 1</label>
-      <label><input type="radio" name="situation" value="2"> 2</label>
-      <label><input type="radio" name="situation" value="3"> 3</label>
-      <label><input type="radio" name="situation" value="4"> 4</label>
-      <label><input type="radio" name="situation" value="5"> 5</label>
+    <!-- Step 2 -->
+    <div class="form-step" id="step2">
+      <label>လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
+      <div class="rating-group">
+        <label><input type="radio" name="situation" value="1"> 1</label>
+        <label><input type="radio" name="situation" value="2"> 2</label>
+        <label><input type="radio" name="situation" value="3"> 3</label>
+        <label><input type="radio" name="situation" value="4"> 4</label>
+        <label><input type="radio" name="situation" value="5"> 5</label>
+      </div>
+      <div class="button-group">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
     </div>
 
-    <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-    <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
-
-    <button onclick="submitPage1()">ပေးပို့မည်</button>
-    <button type="button" onclick="gotoKoBo()">Community Info ဖြည့်ချင်ပါတယ်</button>
+    <!-- Step 3 -->
+    <div class="form-step" id="step3">
+      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+      <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
+      <div class="button-group">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" onclick="submitForm()">ပေးပို့မည်</button>
+      </div>
+    </div>
   </div>
 
-  <!-- JS: VPN Detect + GPS + Page Navigation -->
+  <!-- Script -->
   <script>
     // VPN Detect
     fetch("https://ipapi.co/json/")
@@ -107,38 +126,44 @@
       .then(data => {
         const allowedCountries = ["Myanmar", "Thailand"];
         if (!allowedCountries.includes(data.country_name)) {
-          alert("VPN သုံးနေပါသည်။ မေးလွှာဖြည့်ရန်အတွက် VPN ကိုပိတ်ပြီး ပြန်ဝင်ပါ။");
-          window.location.href = "https://www.google.com";
+          alert("VPN သုံးနေပါသည်။ VPN ပိတ်ပြီး ပြန်ဝင်ပါ။");
+          window.location.href = "https://google.com";
         }
       })
-      .catch(err => {
-        console.error("VPN check failed:", err);
-      });
+      .catch(err => console.error("VPN Check Failed:", err));
 
-    // GPS Fetch
+    // GPS
     window.onload = function () {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
-          function (position) {
-            document.getElementById("latitude").value = position.coords.latitude;
-            document.getElementById("longitude").value = position.coords.longitude;
-            console.log("GPS:", position.coords.latitude, position.coords.longitude);
+          pos => {
+            document.getElementById("latitude").value = pos.coords.latitude;
+            document.getElementById("longitude").value = pos.coords.longitude;
           },
-          function (error) {
-            console.error("GPS Error:", error.message);
-          }
+          err => console.error("GPS Error:", err)
         );
       }
     };
 
-    // Action for Page 1 Submit
-    function submitPage1() {
-      alert("အထက်ပါအချက်အလက်များ ပေးပို့သွားပါပြီ။");
-      // Optional: you can POST the data somewhere here
+    // Step Navigation
+    let currentStep = 1;
+    function showStep(step) {
+      document.querySelectorAll('.form-step').forEach((el, idx) => {
+        el.classList.toggle('active', idx === step - 1);
+      });
+      currentStep = step;
     }
 
-    // Go to KoBo form
-    function gotoKoBo() {
+    function nextStep() {
+      if (currentStep < 3) showStep(currentStep + 1);
+    }
+
+    function prevStep() {
+      if (currentStep > 1) showStep(currentStep - 1);
+    }
+
+    function submitForm() {
+      alert("Form submitted! Community Info ပြည့်စုံဖြည့်ချင်ပါက ဆက်လက်ဖြည့်နိုင်ပါသည်။");
       window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
     }
   </script>
