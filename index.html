@@ -124,7 +124,7 @@
       <label for="situation">လက်ရှိအခြေအနေ</label>
       <select name="situation" id="situation">
         <option value="">ရွေးချယ်ပါ...</option>
-         <option value="1">အရေးတကြီး လိုအပ်</option>
+        <option value="1">အရေးတကြီး လိုအပ်</option>
         <option value="2">အလွန်လိုအပ်</option>
         <option value="3">လိုအပ်</option>
       </select>
@@ -171,33 +171,29 @@ document.getElementById("needForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const formData = new FormData();
 
-  // Collect needs[]
   const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
-  formData.append("needs", needs.join(" ")); // space separated
+  formData.append("needs", needs.join(" "));
 
-  // Collect situation
   const situation = document.getElementById("situation").value;
   formData.append("situation", situation);
 
-  // Collect detail
   const detail = document.getElementById("detail").value;
   formData.append("detail", detail);
 
-  // Collect fileUpload
   const file = document.getElementById("fileUpload").files[0];
   if (file) {
     formData.append("fileUpload", file);
   }
 
-  // POST to KoBo
-      fetch("https://kc.kobotoolbox.org/api/v1/submissions", {
-  method: "POST",
-  headers: {
-    "Authorization": "16ba7e417bd3f71fdbe698241ea60251b8e6ff1d",
-    "Accept": "application/json"
-  },
-  body: formData
-})
+  fetch("https://kc.kobotoolbox.org/api/v1/submissions", {
+    method: "POST",
+    headers: {
+      "Authorization": "Token 16ba7e417bd3f71fdbe698241ea60251b8e6ff1d",
+      "Accept": "application/json",
+      "X-OpenRosa-Version": "1.0"
+    },
+    body: formData
+  })
   .then(response => {
     if (response.ok) {
       document.getElementById("needForm").innerHTML = `
@@ -207,14 +203,16 @@ document.getElementById("needForm").addEventListener("submit", function(e) {
       alert("အမှားရှိပါတယ်။ ပြန်ကြိုးစားပါ။");
     }
   })
-  .catch(() => alert("ပေးပို့မှုမအောင်မြင်ပါ။"));
+  .catch((error) => {
+    console.error("Error:", error);
+    alert("ပေးပို့မှုမအောင်မြင်ပါ။");
+  });
 });
 
 function gotoKoBo() {
   window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
 }
 
-// Fancy Checkbox Highlight
 document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
   input.addEventListener('change', function() {
     if (this.checked) {
