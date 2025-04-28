@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Earthquake Relief Assessment</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -84,10 +84,9 @@
       padding: 4px 8px;
       font-size: 14px;
     }
-    .fancy-option input[type="checkbox"]:checked + span {
-      background-color: #007bff;
-      color: white;
-      border-radius: 6px;
+    /* Updated Checkbox Active */
+    .fancy-option.active {
+      background-color: #cce5ff;
     }
     .button-group {
       display: flex;
@@ -134,7 +133,7 @@
       <div class="fancy-checkbox-group">
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
+<label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
@@ -149,7 +148,7 @@
       <label for="situation">လက်ရှိအခြေအနေ </label>
       <select name="situation" id="situation">
         <option value="">ရွေးချယ်ပါ...</option>
-        <option value="1">အရေးတကြီး လိုအပ်</option>
+    <option value="1">အရေးတကြီး လိုအပ်</option>
         <option value="2">အလွန်လိုအပ်</option>
         <option value="3">လိုအပ်</option>
       </select>
@@ -169,8 +168,8 @@
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
         <button type="submit">Submit</button>
-        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()"data-tooltip="Community Info ဖြည့်မယ်">
-          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
+        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
+          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Icon.png" alt="Go">
         </button>
       </div>
     </div>
@@ -207,6 +206,17 @@ document.getElementById("needForm").addEventListener("submit", function(e) {
 function gotoKoBo() {
   window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
 }
+
+// Fancy Checkbox Active Control
+document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
+  input.addEventListener('change', function() {
+    if (this.checked) {
+      this.closest('.fancy-option').classList.add('active');
+    } else {
+      this.closest('.fancy-option').classList.remove('active');
+    }
+  });
+});
 
 // VPN Detect
 fetch("https://ipapi.co/json/")
