@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Smart Earthquake Relief Assessment</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -36,18 +36,9 @@
       color: #333;
       margin-bottom: 30px;
     }
-    .form-step {
-      display: none;
-    }
-    .form-step.active {
-      display: block;
-    }
-    label {
-      font-weight: 600;
-      margin: 15px 0 8px;
-      display: block;
-      color: #333;
-    }
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    label { font-weight: 600; margin: 15px 0 8px; display: block; color: #333; }
     input, select, textarea {
       width: 100%;
       padding: 12px;
@@ -56,9 +47,7 @@
       border-radius: 8px;
       font-size: 14px;
     }
-    textarea {
-      resize: vertical;
-    }
+    textarea { resize: vertical; }
     .fancy-checkbox-group {
       display: flex;
       flex-wrap: wrap;
@@ -73,21 +62,10 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.2s;
     }
-    .fancy-option:hover {
-      transform: translateY(-1px);
-      background-color: #e0e0e0;
-    }
-    .fancy-option input[type="checkbox"] {
-      display: none;
-    }
-    .fancy-option span {
-      padding: 4px 8px;
-      font-size: 14px;
-    }
-    /* Updated Checkbox Active */
-    .fancy-option.active {
-      background-color: #cce5ff;
-    }
+    .fancy-option:hover { transform: translateY(-1px); background-color: #e0e0e0; }
+    .fancy-option input[type="checkbox"] { display: none; }
+    .fancy-option span { padding: 4px 8px; font-size: 14px; }
+    .fancy-option.active { background-color: #cce5ff; }
     .button-group {
       display: flex;
       justify-content: space-between;
@@ -106,9 +84,7 @@
       cursor: pointer;
       transition: background 0.2s;
     }
-    button:hover {
-      background-color: #0056b3;
-    }
+    button:hover { background-color: #0056b3; }
     .tiny-redirect-btn {
       flex: 0 0 auto;
       background: transparent;
@@ -133,7 +109,7 @@
       <div class="fancy-checkbox-group">
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
-<label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
@@ -145,10 +121,10 @@
     </div>
 
     <div class="form-step" id="step2">
-      <label for="situation">လက်ရှိအခြေအနေ </label>
+      <label for="situation">လက်ရှိအခြေအနေ</label>
       <select name="situation" id="situation">
         <option value="">ရွေးချယ်ပါ...</option>
-    <option value="1">အရေးတကြီး လိုအပ်</option>
+         <option value="1">အရေးတကြီး လိုအပ်</option>
         <option value="2">အလွန်လိုအပ်</option>
         <option value="3">လိုအပ်</option>
       </select>
@@ -193,13 +169,40 @@ function prevStep() {
 
 document.getElementById("needForm").addEventListener("submit", function(e) {
   e.preventDefault();
-  const formData = new FormData(this);
+  const formData = new FormData();
 
+  // Collect needs[]
+  const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
+  formData.append("needs", needs.join(" ")); // space separated
+
+  // Collect situation
+  const situation = document.getElementById("situation").value;
+  formData.append("situation", situation);
+
+  // Collect detail
+  const detail = document.getElementById("detail").value;
+  formData.append("detail", detail);
+
+  // Collect fileUpload
+  const file = document.getElementById("fileUpload").files[0];
+  if (file) {
+    formData.append("fileUpload", file);
+  }
+
+  // POST to KoBo
   fetch("https://ee.kobotoolbox.org/submissions?format=json", {
     method: "POST",
     body: formData
   })
-  .then(response => response.ok ? alert("ပေးပို့ပြီးပါပြီ။") : alert("အမှားရှိပါတယ်"))
+  .then(response => {
+    if (response.ok) {
+      document.getElementById("needForm").innerHTML = `
+        <h2 style="color:#007bff;text-align:center;margin-top:50px;">ကျေးဇူးတင်ပါတယ်။ သတင်းအချက်အလက်ကို ရရှိပါပြီ။</h2>
+      `;
+    } else {
+      alert("အမှားရှိပါတယ်။ ပြန်ကြိုးစားပါ။");
+    }
+  })
   .catch(() => alert("ပေးပို့မှုမအောင်မြင်ပါ။"));
 });
 
@@ -207,7 +210,7 @@ function gotoKoBo() {
   window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
 }
 
-// Fancy Checkbox Active Control
+// Fancy Checkbox Highlight
 document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
   input.addEventListener('change', function() {
     if (this.checked) {
