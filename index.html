@@ -190,10 +190,14 @@ document.getElementById("needForm").addEventListener("submit", function(e) {
   }
 
   // POST to KoBo
-  fetch("https://ee.kobotoolbox.org/submissions?format=json", {
-    method: "POST",
-    body: formData
-  })
+      fetch("https://kc.kobotoolbox.org/api/v1/submissions", {
+  method: "POST",
+  headers: {
+    "Authorization": "16ba7e417bd3f71fdbe698241ea60251b8e6ff1d",
+    "Accept": "application/json"
+  },
+  body: formData
+})
   .then(response => {
     if (response.ok) {
       document.getElementById("needForm").innerHTML = `
