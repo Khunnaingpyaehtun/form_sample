@@ -134,6 +134,7 @@
       <div class="fancy-checkbox-group">
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
+        <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
         <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
@@ -145,14 +146,12 @@
     </div>
 
     <div class="form-step" id="step2">
-      <label for="situation">လက်ရှိအခြေအနေ (၁ – ဆိုး | ၅ – ကောင်း)</label>
+      <label for="situation">လက်ရှိအခြေအနေ </label>
       <select name="situation" id="situation">
         <option value="">ရွေးချယ်ပါ...</option>
-        <option value="1">၁ - အလွန်ဆိုး</option>
-        <option value="2">၂ - ဆိုး</option>
-        <option value="3">၃ - မျှတ</option>
-        <option value="4">၄ - ကောင်း</option>
-        <option value="5">၅ - အလွန်ကောင်း</option>
+        <option value="1">အရေးတကြီး လိုအပ်</option>
+        <option value="2">အလွန်လိုအပ်</option>
+        <option value="3">လိုအပ်</option>
       </select>
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
@@ -170,7 +169,7 @@
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
         <button type="submit">Submit</button>
-        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
+        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()"data-tooltip="Community Info ဖြည့်မယ်">
           <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Icon.png" alt="Go">
         </button>
       </div>
