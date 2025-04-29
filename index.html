@@ -171,15 +171,28 @@
   const db = firebase.database();
   const storage = firebase.storage();
 
-  let currentStep = 1;
+  let latitude = "";
+  let longitude = "";
+
+  // Get Location
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
+    }, () => {
+      console.warn('Location access denied.');
+    });
+  }
+
   function showStep(step) {
     document.querySelectorAll('.form-step').forEach((el, idx) => {
       el.classList.toggle('active', idx === step - 1);
     });
-    currentStep = step;
   }
-  function nextStep() { if (currentStep < 3) showStep(currentStep + 1); }
-  function prevStep() { if (currentStep > 1) showStep(currentStep - 1); }
+
+  let currentStep = 1;
+  function nextStep() { if (currentStep < 3) { showStep(++currentStep); } }
+  function prevStep() { if (currentStep > 1) { showStep(--currentStep); } }
   function gotoKoBo() { window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm"; }
 
   document.getElementById("needForm").addEventListener("submit", async function(e) {
@@ -203,12 +216,13 @@
       situation,
       detail,
       fileUrl,
+      location: { latitude, longitude },
       submittedAt: new Date().toISOString()
     };
 
     db.ref("submissions").push(formData)
       .then(() => {
-        alert("Data + File Firebase မှာ သိမ်းပြီးပါပြီ ✅");
+        alert("Data + File + Location Firebase မှာ သိမ်းပြီးပါပြီ ✅");
         document.getElementById("needForm").reset();
         showStep(1);
       })
@@ -217,25 +231,6 @@
         alert("သိမ်းခြင်းမအောင်မြင်ပါ ❌");
       });
   });
-
-  // VPN Detect
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
-      if (!["Myanmar", "Thailand"].includes(data.country_name)) {
-        alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
-        window.location.href = "https://google.com";
-      }
-    }).catch(() => console.warn("VPN Check Failed"));
-
-  // GPS Detect
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(pos => {
-      console.log("Latitude:", pos.coords.latitude, "Longitude:", pos.coords.longitude);
-    }, () => {
-      console.warn("Location access denied.");
-    });
-  }
 </script>
 
 </body>
