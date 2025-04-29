@@ -185,13 +185,8 @@ document.getElementById("needForm").addEventListener("submit", function(e) {
     formData.append("fileUpload", file);
   }
 
-  fetch("https://kc.kobotoolbox.org/api/v1/submissions", {
+  fetch("http://localhost:3000/submit", {   // ✅ Proxy server URL
     method: "POST",
-    headers: {
-      "Authorization": "Token 16ba7e417bd3f71fdbe698241ea60251b8e6ff1d",
-      "Accept": "application/json",
-      "X-OpenRosa-Version": "1.0"
-    },
     body: formData
   })
   .then(response => {
@@ -222,25 +217,6 @@ document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input 
     }
   });
 });
-
-// VPN Detect
-fetch("https://ipapi.co/json/")
-  .then(res => res.json())
-  .then(data => {
-    if (!["Myanmar", "Thailand"].includes(data.country_name)) {
-      alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
-      window.location.href = "https://google.com";
-    }
-  }).catch(() => console.warn("VPN Check Failed"));
-
-// GPS Detect
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(pos => {
-    console.log("Latitude:", pos.coords.latitude, "Longitude:", pos.coords.longitude);
-  }, () => {
-    console.warn("Location access denied.");
-  });
-}
 </script>
 
 </body>
