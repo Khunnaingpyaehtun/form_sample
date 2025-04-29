@@ -36,9 +36,12 @@
       color: #333;
       margin-bottom: 30px;
     }
-    .form-step { display: none; }
-    .form-step.active { display: block; }
-    label { font-weight: 600; margin: 15px 0 8px; display: block; color: #333; }
+    label {
+      font-weight: 600;
+      margin: 15px 0 8px;
+      display: block;
+      color: #333;
+    }
     input, select, textarea {
       width: 100%;
       padding: 12px;
@@ -47,30 +50,10 @@
       border-radius: 8px;
       font-size: 14px;
     }
-    textarea { resize: vertical; }
-    .fancy-checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .fancy-option {
-      display: flex;
-      align-items: center;
-      background-color: #f0f0f0;
-      border-radius: 12px;
-      padding: 10px 18px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .fancy-option:hover { transform: translateY(-1px); background-color: #e0e0e0; }
-    .fancy-option input[type="checkbox"] { display: none; }
-    .fancy-option span { padding: 4px 8px; font-size: 14px; }
-    .fancy-option.active { background-color: #cce5ff; }
     .button-group {
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      align-items: center;
     }
     button {
       flex: 1;
@@ -85,16 +68,6 @@
       transition: background 0.2s;
     }
     button:hover { background-color: #0056b3; }
-    .tiny-redirect-btn {
-      flex: 0 0 auto;
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    .tiny-redirect-btn img {
-      width: 32px;
-      height: 32px;
-    }
   </style>
 </head>
 <body>
@@ -103,120 +76,76 @@
     <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Logo.png" alt="Logo" />
   </div>
   <h2>Smart Earthquake Relief Assessment</h2>
-  <form id="needForm" enctype="multipart/form-data">
-    <div class="form-step active" id="step1">
-      <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-      <div class="fancy-checkbox-group">
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
-      </div>
-      <div class="button-group">
-        <span></span>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
-    </div>
+  <form id="needForm">
+    <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+    <label><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"> စားနပ်ရိက္ခာ</label>
+    <label><input type="checkbox" name="needs[]" value="ရေ"> ရေ</label>
+    <label><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"> သန့်ရှင်းရေး</label>
+    <label><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"> ဆေးဝါးနှင့်ကျန်းမာရေး</label>
+    <label><input type="checkbox" name="needs[]" value="ငွေကြေး"> ငွေကြေး</label>
+    <label><input type="checkbox" name="needs[]" value="အမိုးအကာ"> အမိုးအကာ</label>
 
-    <div class="form-step" id="step2">
-      <label for="situation">လက်ရှိအခြေအနေ</label>
-      <select name="situation" id="situation">
-        <option value="">ရွေးချယ်ပါ...</option>
-        <option value="1">အရေးတကြီး လိုအပ်</option>
-        <option value="2">အလွန်လိုအပ်</option>
-        <option value="3">လိုအပ်</option>
-      </select>
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
-    </div>
+    <label for="situation">လက်ရှိအခြေအနေ</label>
+    <select id="situation" name="situation">
+      <option value="">ရွေးချယ်ပါ...</option>
+      <option value="1">အရေးတကြီး လိုအပ်</option>
+      <option value="2">အလွန်လိုအပ်</option>
+      <option value="3">လိုအပ်</option>
+    </select>
 
-    <div class="form-step" id="step3">
-      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-      <textarea id="detail" name="detail" rows="4" placeholder="သိစေရမယ့်အချက်အလက်..."></textarea>
+    <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+    <textarea id="detail" name="detail" rows="4"></textarea>
 
-      <label for="fileUpload">ဖိုင်တင်ပါ (ဓာတ်ပုံ/ဗီဒီယို)</label>
-      <input type="file" id="fileUpload" name="fileUpload" accept="image/*,video/*">
-
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="submit">Submit</button>
-        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
-          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
-        </button>
-      </div>
+    <div class="button-group">
+      <button type="submit">Submit</button>
     </div>
   </form>
 </div>
 
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
 <script>
-let currentStep = 1;
-function showStep(step) {
-  document.querySelectorAll('.form-step').forEach((el, idx) => {
-    el.classList.toggle('active', idx === step - 1);
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyCXJ1cgfJOpnR3fn-ZBYrwbjbMAZik4pEs",
+    authDomain: "mercu-c6dfc.firebaseapp.com",
+    databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "mercu-c6dfc",
+    storageBucket: "mercu-c6dfc.firebasestorage.app",
+    messagingSenderId: "904021728086",
+    appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
+    measurementId: "G-TN8HDENML8"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  document.getElementById("needForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
+    const situation = document.getElementById("situation").value;
+    const detail = document.getElementById("detail").value;
+
+    const formData = {
+      needs: needs,
+      situation: situation,
+      detail: detail,
+      submittedAt: new Date().toISOString()
+    };
+
+    db.ref("submissions").push(formData)
+      .then(() => {
+        alert("Firebase မှာ သိမ်းပြီးပါပြီ ✅");
+        document.getElementById("needForm").reset();
+      })
+      .catch(error => {
+        console.error(error);
+        alert("သိမ်းမရဘူး ❌");
+      });
   });
-  currentStep = step;
-}
-function nextStep() {
-  if (currentStep < 3) showStep(currentStep + 1);
-}
-function prevStep() {
-  if (currentStep > 1) showStep(currentStep - 1);
-}
-
-document.getElementById("needForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-  const formData = new FormData();
-
-  const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
-  formData.append("needs", needs.join(" "));
-
-  const situation = document.getElementById("situation").value;
-  formData.append("situation", situation);
-
-  const detail = document.getElementById("detail").value;
-  formData.append("detail", detail);
-
-  const file = document.getElementById("fileUpload").files[0];
-  if (file) {
-    formData.append("fileUpload", file);
-  }
-
-  fetch("http://localhost:3000/submit", {   // ✅ Proxy server URL
-    method: "POST",
-    body: formData
-  })
-  .then(response => {
-    if (response.ok) {
-      document.getElementById("needForm").innerHTML = `
-        <h2 style="color:#007bff;text-align:center;margin-top:50px;">ကျေးဇူးတင်ပါတယ်။ သတင်းအချက်အလက်ကို ရရှိပါပြီ။</h2>
-      `;
-    } else {
-      alert("အမှားရှိပါတယ်။ ပြန်ကြိုးစားပါ။");
-    }
-  })
-  .catch((error) => {
-    console.error("Error:", error);
-    alert("ပေးပို့မှုမအောင်မြင်ပါ။");
-  });
-});
-
-function gotoKoBo() {
-  window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
-}
-
-document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
-  input.addEventListener('change', function() {
-    if (this.checked) {
-      this.closest('.fancy-option').classList.add('active');
-    } else {
-      this.closest('.fancy-option').classList.remove('active');
-    }
-  });
-});
 </script>
 
 </body>
