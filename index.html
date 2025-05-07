@@ -406,7 +406,7 @@ document.getElementById('needForm').addEventListener('submit', function(e) {
 
     db.ref("submissions").push(data)
         .then(() => {
-            alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
+            alert("ဖြေဆိုမှုအတွက်ကျေးဇူးတင်ပါတယ်");
             document.getElementById("needForm").reset();
             showStep(1);
         })
