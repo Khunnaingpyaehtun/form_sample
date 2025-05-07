@@ -336,40 +336,21 @@
   });
 
   function nextStep() {
-    if (currentStep < document.querySelectorAll('.form-step').length) {
-      showStep(++currentStep);
+    const currentStepElement = document.querySelector('.form-step.active');
+    const nextStepElement = currentStepElement.nextElementSibling;
+    if (nextStepElement && nextStepElement.classList.contains('form-step')) {
+      currentStepElement.classList.remove('active');
+      nextStepElement.classList.add('active');
     }
   }
 
   function prevStep() {
-    if (currentStep > 1) {
-      showStep(--currentStep);
+    const currentStepElement = document.querySelector('.form-step.active');
+    const prevStepElement = currentStepElement.previousElementSibling;
+    if (prevStepElement && prevStepElement.classList.contains('form-step')) {
+      currentStepElement.classList.remove('active');
+      prevStepElement.classList.add('active');
     }
   }
 
-  let currentStep = 1;
-  function showStep(step) {
-    document.querySelectorAll('.form-step').forEach((el, idx) => {
-      el.classList.toggle('active', idx === step - 1);
-    });
-  }
-
-  showStep(currentStep);
-
-  function gotoKoBo() {
-    window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
-  }
-
-  // VPN Detect
-  fetch("https://ipapi.co/json/")
-    .then(res => res.json.then(data => {
-      if (!["Myanmar", "Thailand"].includes(data.country_name)) {
-        alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
-        window.location.href = "https://google.com";
-      }
-    })
-    .catch(() => console.warn("VPN check failed"));
-</script>
-
-</body>
-</html>
+  // ပထမဆုံး Step ကို စတင်
