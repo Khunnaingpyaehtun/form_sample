@@ -1,356 +1,366 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Earthquake Relief Assessment</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(to right, #eef2f3, #8e9eab);
-      margin: 0;
-      padding: 40px 20px;
-    }
-    .form-container {
-      max-width: 640px;
-      margin: auto;
-      background: white;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-    .logo-container {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .logo-container img {
-      max-width: 200px;
-      width: 100%;
-      height: auto;
-    }
-    h2 {
-      text-align: center;
-      font-weight: 600;
-      margin-bottom: 30px;
-      font-size: 24px;
-      color: #333;
-    }
-    label {
-      font-weight: 600;
-      display: block;
-      margin: 15px 0 8px;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    textarea { resize: vertical; }
-    .form-step { display: none; }
-    .form-step.active { display: block; }
-    .fancy-checkbox-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .fancy-option {
-      display: flex;
-      align-items: center;
-      background: #f0f0f0;
-      border-radius: 12px;
-      padding: 10px 18px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .fancy-option input[type="checkbox"] { display: none; }
-    .fancy-option span { font-size: 14px; }
-    .fancy-option.active { background: #cce5ff; }
-    .button-group {
-      display: flex;
-      justify-content: space-between;
-      gap: 10px;
-    }
-    button {
-      flex: 1;
-      padding: 12px;
-      font-weight: bold;
-      background: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover { background: #0056b3; }
-    .tiny-redirect-btn {
-      background: transparent;
-      border: none;
-      padding: 0;
-    }
-    .tiny-redirect-btn img {
-      width: 32px;
-      height: 32px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Earthquake Relief Assessment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(to right, #eef2f3, #8e9eab);
+            margin: 0;
+            padding: 40px 20px;
+        }
+        .form-container {
+            max-width: 640px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+        }
+        h2 {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #333;
+        }
+        label {
+            font-weight: 600;
+            display: block;
+            margin: 15px 0 8px;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        textarea { resize: vertical; }
+        .form-step { display: none; }
+        .form-step.active { display: block; }
+        .fancy-checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .fancy-option {
+            display: flex;
+            align-items: center;
+            background: #f0f0f0;
+            border-radius: 12px;
+            padding: 10px 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .fancy-option input[type="checkbox"] { display: none; }
+        .fancy-option span { font-size: 14px; }
+        .fancy-option.active { background: #cce5ff; }
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        button {
+            flex: 1;
+            padding: 12px;
+            font-weight: bold;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        button:hover { background: #0056b3; }
+        .tiny-redirect-btn {
+            background: transparent;
+            border: none;
+            padding: 0;
+        }
+        .tiny-redirect-btn img {
+            width: 32px;
+            height: 32px;
+        }
+    </style>
 </head>
 <body>
 <div class="form-container">
-  <div class="logo-container">
-    <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Logo.png" alt="Logo">
-  </div>
-  <h2>Smart Earthquake Relief Assessment</h2>
-  <form id="needForm">
-    <div class="form-step active" id="step1">
-      <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-      <div class="fancy-checkbox-group">
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
-        <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
-      </div>
-      <div class="button-group">
-        <span></span>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
+    <div class="logo-container">
+        <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Logo.png" alt="Logo">
     </div>
+    <h2>Smart Earthquake Relief Assessment</h2>
+    <form id="needForm">
+        <div class="form-step active" id="step1">
+            <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+            <div class="fancy-checkbox-group">
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
+            </div>
+            <div class="button-group">
+                <span></span>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
 
-    <div class="form-step" id="step2">
-      <label for="situation">လက်ရှိအခြေအနေ</label>
-      <select id="situation" name="situation">
-        <option value="">ရွေးချယ်ပါ...</option>
-        <option value="1">အရေးတကြီး လိုအပ်</option>
-        <option value="2">အလွန်လိုအပ်</option>
-        <option value="3">လိုအပ်</option>
-      </select>
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
-    </div>
+        <div class="form-step" id="step2">
+            <label for="situation">လက်ရှိအခြေအနေ</label>
+            <select id="situation" name="situation">
+                <option value="">ရွေးချယ်ပါ...</option>
+                <option value="1">အရေးတကြီး လိုအပ်</option>
+                <option value="2">အလွန်လိုအပ်</option>
+                <option value="3">လိုအပ်</option>
+            </select>
+            <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
 
-    <div class="form-step" id="step3">
-      <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-      <textarea id="detail" name="detail" rows="4"></textarea>
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="button" onclick="nextStep()">Next</button>
-      </div>
-    </div>
+        <div class="form-step" id="step3">
+            <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+            <textarea id="detail" name="detail" rows="4"></textarea>
+            <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
 
-    <div class="form-step" id="step4">
-      <label for="region">တိုင်း/ပြည်နယ်</label>
-      <select id="region" name="region">
-        <option value="">ရွေးချယ်ပါ...</option>
-        <option value="စစ်ကိုင်းတိုင်း">စစ်ကိုင်းတိုင်း</option>
-        <option value="မန္တလေးတိုင်း">မန္တလေးတိုင်း</option>
-        <option value="ရန်ကုန်တိုင်း">ရန်ကုန်တိုင်း</option>
-        </select>
+        <div class="form-step" id="step4">
+            <label for="region">တိုင်း/ပြည်နယ်</label>
+            <select id="region" name="region">
+                <option value="">ရွေးချယ်ပါ...</option>
+                <option value="စစ်ကိုင်းတိုင်း">စစ်ကိုင်းတိုင်း</option>
+                <option value="မန္တလေးတိုင်း">မန္တလေးတိုင်း</option>
+                <option value="ရန်ကုန်တိုင်း">ရန်ကုန်တိုင်း</option>
+            </select>
 
-      <label for="district">ခရိုင်/မြို့နယ်</label>
-      <select id="district" name="district" disabled>
-        <option value="">တိုင်း/ပြည်နယ်ကို အရင်ရွေးပါ</option>
-        </select>
+            <label for="district">ခရိုင်/မြို့နယ်</label>
+            <select id="district" name="district" disabled>
+                <option value="">တိုင်း/ပြည်နယ်ကို အရင်ရွေးပါ</option>
+            </select>
 
-      <label for="city">မြို့</label>
-      <select id="city" name="city" disabled>
-        <option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>
-        </select>
+            <label for="city">မြို့</label>
+            <select id="city" name="city" disabled>
+                <option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>
+            </select>
 
-      <div class="button-group">
-        <button type="button" onclick="prevStep()">Back</button>
-        <button type="submit">Submit</button>
-        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
-          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
-        </button>
-      </div>
-    </div>
-  </form>
+            <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="submit">Submit</button>
+                <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
+                    <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 
 <script>
-  const firebaseConfig = {
-    apiKey: "AIzaSyCXJ1cgfJOpnR3fn-ZBYrwbjbMAZik4pEs",
-    authDomain: "mercu-c6dfc.firebaseapp.com",
-    databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "mercu-c6dfc",
-    messagingSenderId: "904021728086",
-    appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
-    measurementId: "G-TN8HDENML8"
-  };
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
+    const firebaseConfig = {
+        apiKey: "AIzaSyCXJ1cgfJOpnR3fn-ZBYrwbjbMAZik4pEs",
+        authDomain: "mercu-c6dfc.firebaseapp.com",
+        databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "mercu-c6dfc",
+        messagingSenderId: "904021728086",
+        appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
+        measurementId: "G-TN8HDENML8"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
 
-  let latitude = "";
-  let longitude = "";
+    let latitude = "";
+    let longitude = "";
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      latitude = position.coords.latitude;
-      longitude = position.coords.longitude;
-    }, () => console.warn('Location access denied.'));
-  }
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            latitude = position.coords.latitude;
+            longitude = position.coords.longitude;
+        }, () => console.warn('Location access denied.'));
+    }
 
-  document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
-    input.addEventListener('change', function() {
-      if (this.checked) {
-        this.closest('.fancy-option').classList.add('active');
-      } else {
-        this.closest('.fancy-option').classList.remove('active');
-      }
+    document.querySelectorAll('.fancy-option input[type="checkbox"]').forEach(input => {
+        input.addEventListener('change', function() {
+            if (this.checked) {
+                this.closest('.fancy-option').classList.add('active');
+            } else {
+                this.closest('.fancy-option').classList.remove('active');
+            }
+        });
     });
-  });
 
-  const regionSelect = document.getElementById('region');
-  const districtSelect = document.getElementById('district');
-  const citySelect = document.getElementById('city');
+    const regionSelect = document.getElementById('region');
+    const districtSelect = document.getElementById('district');
+    const citySelect = document.getElementById('city');
 
-  // တိုင်း/ပြည်နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
-  const regionsData = {
-    "စစ်ကိုင်းတိုင်း": ["မုံရွာ", "ရွှေဘို", "ကလေး"],
-    "မန္တလေးတိုင်း": ["မန္တလေး", "ပြင်ဦးလွင်", "ကျောက်ဆည်"],
-    "ရန်ကုန်တိုင်း": ["ရန်ကုန်", "မှော်ဘီ", "ဒဂုံ"]
-    // နောက်ထပ် တိုင်း/ပြည်နယ်များ ထည့်နိုင်ပါတယ်
-  };
-
-  // ခရိုင်/မြို့နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
-  const districtsData = {
-    "စစ်ကိုင်းတိုင်း": {
-      "မုံရွာ": ["မုံရွာ", "အရာတော်"],
-      "ရွှေဘို": ["ရွှေဘို", "တန့်ဆည်"],
-      "ကလေး": ["ကလေး", "ကလေးဝ"]
-    },
-    "မန္တလေးတိုင်း": {
-      "မန္တလေး": ["အောင်မြေသာစံ", "ချမ်းမြသာစည်"],
-      "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်"],
-      "ကျောက်ဆည်": ["ကျောက်ဆည်"]
-    },
-    "ရန်ကုန်တိုင်း": {
-      "ရန်ကုန်": ["လသာ", "ပန်းဘဲတန်း"],
-      "မှော်ဘီ": ["မှော်ဘီ"],
-      "ဒဂုံ": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်း", "ဒဂုံမြို့သစ် တောင်ပိုင်း"]
-    }
-    // နောက်ထပ် ခရိုင်/မြို့နယ်များ ထည့်နိုင်ပါတယ်
-  };
-
-  // မြို့ ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
-  const citiesData = {
-    "စစ်ကိုင်းတိုင်း": {
-      "မုံရွာ": { "မုံရွာ": ["မုံရွာမြို့"] },
-      "အရာတော်": { "အရာတော်": ["အရာတော်မြို့"] },
-      "ရွှေဘို": { "ရွှေဘို": ["ရွှေဘိုမြို့"] },
-      "တန့်ဆည်": { "တန့်ဆည်": ["တန့်ဆည်မြို့"] },
-      "ကလေး": { "ကလေး": ["ကလေးမြို့"] },
-      "ကလေးဝ": { "ကလေးဝ": ["ကလေးဝမြို့"] }
-    },
-    "မန္တလေးတိုင်း": {
-      "မန္တလေး": { "အောင်မြေသာစံ": ["အောင်မြေသာစံမြို့နယ်"], "ချမ်းမြသာစည်": ["ချမ်းမြသာစည်မြို့နယ်"] },
-      "ပြင်ဦးလွင်": { "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်မြို့"] },
-      "ကျောက်ဆည်": { "ကျောက်ဆည်": ["ကျောက်ဆည်မြို့"] }
-    },
-    "ရန်ကုန်တိုင်း": {
-      "ရန်ကုန်": { "လသာ": ["လသာမြို့နယ်"], "ပန်းဘဲတန်း": ["ပန်းဘဲတန်းမြို့နယ်"] },
-      "မှော်ဘီ": { "မှော်ဘီ": ["မှော်ဘီမြို့"] },
-      "ဒဂုံ": { "ဒဂုံမြို့သစ် အရှေ့ပိုင်း": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်းမြို့နယ်"], "ဒဂုံမြို့သစ် တောင်ပိုင်း": ["ဒဂုံမြို့သစ် တောင်ပိုင်းမြို့နယ်"] }
-    }
-    // နောက်ထပ် မြို့များ ထည့်နိုင်ပါတယ်
-  };
-
-  regionSelect.addEventListener('change', function() {
-    const selectedRegion = this.value;
-    districtSelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
-    citySelect.innerHTML = '<option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>';
-    citySelect.disabled = true;
-
-    if (regionsData[selectedRegion]) {
-      districtsData[selectedRegion] && Object.keys(districtsData[selectedRegion]).forEach(district => {
-        const option = document.createElement('option');
-        option.value = district;
-        option.textContent = district;
-        districtSelect.appendChild(option);
-      });
-      districtSelect.disabled = false;
-    } else {
-      districtSelect.disabled = true;
-    }
-  });
-
-  districtSelect.addEventListener('change', function() {
-    const selectedRegion = regionSelect.value;
-    const selectedDistrict = this.value;
-    citySelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
-
-    if (districtsData[selectedRegion] && citiesData[selectedRegion] && citiesData[selectedRegion][selectedDistrict]) {
-      citiesData[selectedRegion][selectedDistrict] && Object.keys(citiesData[selectedRegion][selectedDistrict]).forEach(city => {
-        const option = document.createElement('option');
-        option.value = city;
-        option.textContent = city;
-        citySelect.appendChild(option);
-      });
-      citySelect.disabled = false;
-    } else {
-      citySelect.disabled = true;
-    }
-  });
-
-  document.getElementById('needForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
-    const situation = document.getElementById("situation").value;
-    const detail = document.getElementById("detail").value;
-    const region = document.getElementById("region").value;
-    const district = document.getElementById("district").value;
-    const city = document.getElementById("city").value;
-
-    const data = {
-      needs,
-      situation,
-      detail,
-      location: { latitude, longitude },
-      region,
-      district,
-      city,
-      submittedAt: new Date().toISOString()
+    // တိုင်း/ပြည်နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+    const regionsData = {
+        "စစ်ကိုင်းတိုင်း": ["မုံရွာ", "ရွှေဘို", "ကလေး"],
+        "မန္တလေးတိုင်း": ["မန္တလေး", "ပြင်ဦးလွင်", "ကျောက်ဆည်"],
+        "ရန်ကုန်တိုင်း": ["ရန်ကုန်", "မှော်ဘီ", "ဒဂုံ"]
+        // နောက်ထပ် တိုင်း/ပြည်နယ်များ ထည့်နိုင်ပါတယ်
     };
 
-    db.ref("submissions").push(data)
-      .then(() => {
-        alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
-        document.getElementById("needForm").reset();
-        showStep(1);
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("Save Failed ❌");
-      });
-  });
+    // ခရိုင်/မြို့နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+    const districtsData = {
+        "စစ်ကိုင်းတိုင်း": {
+            "မုံရွာ": ["မုံရွာ", "အရာတော်"],
+            "ရွှေဘို": ["ရွှေဘို", "တန့်ဆည်"],
+            "ကလေး": ["ကလေး", "ကလေးဝ"]
+        },
+        "မန္တလေးတိုင်း": {
+            "မန္တလေး": ["အောင်မြေသာစံ", "ချမ်းမြသာစည်"],
+            "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်"],
+            "ကျောက်ဆည်": ["ကျောက်ဆည်"]
+        },
+        "ရန်ကုန်တိုင်း": {
+            "ရန်ကုန်": ["လသာ", "ပန်းဘဲတန်း"],
+            "မှော်ဘီ": ["မှော်ဘီ"],
+            "ဒဂုံ": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်း", "ဒဂုံမြို့သစ် တောင်ပိုင်း"]
+        }
+        // နောက်ထပ် ခရိုင်/မြို့နယ်များ ထည့်နိုင်ပါတယ်
+    };
 
-  function nextStep() {
-    const currentStepElement = document.querySelector('.form-step.active');
-    const nextStepElement = currentStepElement.nextElementSibling;
-    if (nextStepElement && nextStepElement.classList.contains('form-step')) {
-      currentStepElement.classList.remove('active');
-      nextStepElement.classList.add('active');
+    // မြို့ ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+    const citiesData = {
+        "စစ်ကိုင်းတိုင်း": {
+            "မုံရွာ": { "မုံရွာ": ["မုံရွာမြို့"] },
+            "အရာတော်": { "အရာတော်": ["အရာတော်မြို့"] },
+            "ရွှေဘို": { "ရွှေဘို": ["ရွှေဘိုမြို့"] },
+            "တန့်ဆည်": { "တန့်ဆည်": ["တန့်ဆည်မြို့"] },
+            "ကလေး": { "ကလေး": ["ကလေးမြို့"] },
+            "ကလေးဝ": { "ကလေးဝ": ["ကလေးဝမြို့"] }
+        },
+        "မန္တလေးတိုင်း": {
+            "မန္တလေး": { "အောင်မြေသာစံ": ["အောင်မြေသာစံမြို့နယ်"], "ချမ်းမြသာစည်": ["ချမ်းမြသာစည်မြို့နယ်"] },
+            "ပြင်ဦးလွင်": { "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်မြို့"] },
+            "ကျောက်ဆည်": { "ကျောက်ဆည်": ["ကျောက်ဆည်မြို့"] }
+        },
+        "ရန်ကုန်တိုင်း": {
+            "ရန်ကုန်": { "လသာ": ["လသာမြို့နယ်"], "ပန်းဘဲတန်း": ["ပန်းဘဲတန်းမြို့နယ်"] },
+            "မှော်ဘီ": { "မှော်ဘီ": ["မှော်ဘီမြို့"] },
+            "ဒဂုံ": { "ဒဂုံမြို့သစ် အရှေ့ပိုင်း": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်းမြို့နယ်"], "ဒဂုံမြို့သစ် တောင်ပိုင်း": ["ဒဂုံမြို့သစ် တောင်ပိုင်းမြို့နယ်"] }
+        }
+        // နောက်ထပ် မြို့များ ထည့်နိုင်ပါတယ်
+    };
+
+    regionSelect.addEventListener('change', function() {
+        const selectedRegion = this.value;
+        districtSelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
+        citySelect.innerHTML = '<option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>';
+        citySelect.disabled = true;
+
+        if (regionsData[selectedRegion]) {
+            districtsData[selectedRegion] && Object.keys(districtsData[selectedRegion]).forEach(district => {
+                const option = document.createElement('option');
+                option.value = district;
+                option.textContent = district;
+                districtSelect.appendChild(option);
+            });
+            districtSelect.disabled = false;
+        } else {
+            districtSelect.disabled = true;
+        }
+    });
+
+    districtSelect.addEventListener('change', function() {
+        const selectedRegion = regionSelect.value;
+        const selectedDistrict = this.value;
+        citySelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
+
+        if (districtsData[selectedRegion] && citiesData[selectedRegion] && citiesData[selectedRegion][selectedDistrict]) {
+            citiesData[selectedRegion][selectedDistrict] && Object.keys(citiesData[selectedRegion][selectedDistrict]).forEach(city => {
+                const option = document.createElement('option');
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+            citySelect.disabled = false;
+        } else {
+            citySelect.disabled = true;
+        }
+    });
+
+    document.getElementById('needForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
+        const situation = document.getElementById("situation").value;
+        const detail = document.getElementById("detail").value;
+        const region = document.getElementById("region").value;
+        const district = document.getElementById("district").value;
+        const city = document.getElementById("city").value;
+
+        const data = {
+            needs,
+            situation,
+            detail,
+            location: { latitude, longitude },
+            region,
+            district,
+            city,
+            submittedAt: new Date().toISOString()
+        };
+
+        db.ref("submissions").push(data)
+            .then(() => {
+                alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
+                document.getElementById("needForm").reset();
+                showStep(1);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("Save Failed ❌");
+            });
+    });
+
+    function nextStep() {
+        const currentStepElement = document.querySelector('.form-step.active');
+        const nextStepElement = currentStepElement.nextElementSibling;
+        if (nextStepElement && nextStepElement.classList.contains('form-step')) {
+            currentStepElement.classList.remove('active');
+            nextStepElement.classList.add('active');
+        }
     }
-  }
 
-  function prevStep() {
-    const currentStepElement = document.querySelector('.form-step.active');
-    const prevStepElement = currentStepElement.previousElementSibling;
-    if (prevStepElement && prevStepElement.classList.contains('form-step')) {
-      currentStepElement.classList.remove('active');
-      prevStepElement.classList.add('active');
+    function prevStep() {
+        const currentStepElement = document.querySelector('.form-step.active');
+        const prevStepElement = currentStepElement.previousElementSibling;
+        if (prevStepElement && prevStepElement.classList.contains('form-step')) {
+            currentStepElement.classList.remove('active');
+            prevStepElement.classList.add('active');
+        }
     }
-  }
 
-  // ပထမဆုံး Step ကို စတင်
+    // ပထမဆုံး Step ကို စတင်ပြသရန်
+    const firstStep = document.getElementById('step1');
+    if (firstStep) {
+        firstStep.classList.add('active');
+    }
+
+    function gotoKoBo() {
+        window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
+    }
+
+    // VPN
