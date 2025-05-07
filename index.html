@@ -335,8 +335,7 @@
             });
     });
 
-    function nextStep() {
-        const currentStepElement = document.querySelector('.form-step.active');
+    function nextStep() {const currentStepElement = document.querySelector('.form-step.active');
         const nextStepElement = currentStepElement.nextElementSibling;
         if (nextStepElement && nextStepElement.classList.contains('form-step')) {
             currentStepElement.classList.remove('active');
@@ -356,7 +355,7 @@
     // ပထမဆုံး Step ကို စတင်ပြသရန်
     const firstStep = document.getElementById('step1');
     if (firstStep) {
-        firstStep.classList.add('active');firstStep.classList.add('active');
+        firstStep.classList.add('active');
     }
 
     function gotoKoBo() {
