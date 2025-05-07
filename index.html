@@ -354,7 +354,7 @@
     }
 
     // ပထမဆုံး Step ကို စတင်ပြသရန်
-    const firstStep = document.getElementById('step1');
+    const firstStep = document.getElementByIdconst firstStep = document.getElementById('step1');
     if (firstStep) {
         firstStep.classList.add('active');
     }
@@ -363,4 +363,17 @@
         window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
     }
 
-    // VPN
+    // VPN Detect
+    fetch("https://ipapi.co/json/")
+        .then(res => res.json())
+        .then(data => {
+            if (!["Myanmar", "Thailand"].includes(data.country_name)) {
+                alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
+                window.location.href = "https://google.com";
+            }
+        })
+        .catch(() => console.warn("VPN check failed"));
+</script>
+
+</body>
+</html>
