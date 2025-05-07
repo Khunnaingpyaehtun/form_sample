@@ -104,7 +104,7 @@
     <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Logo.png" alt="Logo">
   </div>
   <h2>Smart Earthquake Relief Assessment</h2>
-  <form id="needForm" enctype="multipart/form-data">
+  <form id="needForm">
     <div class="form-step active" id="step1">
       <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
       <div class="fancy-checkbox-group">
@@ -138,16 +138,9 @@
     <div class="form-step" id="step3">
       <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
       <textarea id="detail" name="detail" rows="4"></textarea>
-
-      <label for="fileUpload">ဖိုင်တင်ပါ (ဓာတ်ပုံ/ဗီဒီယို)</label>
-      <input type="file" id="fileUpload" name="fileUpload" accept="image/*,video/*">
-
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
         <button type="button" onclick="nextStep()">Next</button>
-        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
-          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
-        </button>
       </div>
     </div>
 
@@ -173,6 +166,9 @@
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
         <button type="submit">Submit</button>
+        <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
+          <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
+        </button>
       </div>
     </div>
   </form>
@@ -180,7 +176,6 @@
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
 
 <script>
   const firebaseConfig = {
@@ -188,14 +183,12 @@
     authDomain: "mercu-c6dfc.firebaseapp.com",
     databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
     projectId: "mercu-c6dfc",
-    storageBucket: "mercu-c6dfc.appspot.com",
     messagingSenderId: "904021728086",
     appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
     measurementId: "G-TN8HDENML8"
   };
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-  const storage = firebase.storage();
 
   let latitude = "";
   let longitude = "";
@@ -309,29 +302,20 @@
     }
   });
 
-  document.getElementById('needForm').addEventListener('submit', async function(e) {
+  document.getElementById('needForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
     const situation = document.getElementById("situation").value;
     const detail = document.getElementById("detail").value;
-    const file = document.getElementById("fileUpload").files[0];
     const region = document.getElementById("region").value;
     const district = document.getElementById("district").value;
     const city = document.getElementById("city").value;
-
-    let fileUrl = "";
-    if (file) {
-      const storageRef = storage.ref('uploads/' + file.name);
-      await storageRef.put(file);
-      fileUrl = await storageRef.getDownloadURL();
-    }
 
     const data = {
       needs,
       situation,
       detail,
-      fileUrl,
       location: { latitude, longitude },
       region,
       district,
@@ -341,7 +325,7 @@
 
     db.ref("submissions").push(data)
       .then(() => {
-        alert("Data + File + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
+        alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
         document.getElementById("needForm").reset();
         showStep(1);
       })
@@ -378,8 +362,7 @@
 
   // VPN Detect
   fetch("https://ipapi.co/json/")
-    .then(res => res.json())
-    .then(data => {
+    .then(res => res.json.then(data => {
       if (!["Myanmar", "Thailand"].includes(data.country_name)) {
         alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
         window.location.href = "https://google.com";
