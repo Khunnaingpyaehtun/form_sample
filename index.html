@@ -44,7 +44,7 @@
         input, select, textarea {
             width: 100%;
             padding: 12px;
-            margin-bottom: 20px;
+            margin-bottom:25px;
             border: 1px solid #ccc;
             border-radius: 8px;
             font-size: 14px;
@@ -105,7 +105,7 @@
     </div>
     <h2>Smart Earthquake Relief Assessment</h2>
     <form id="needForm">
-        <div class="form-step" id="step1">
+        <div class="form-step active" id="step1">
             <label for="region">တိုင်း/ပြည်နယ်</label>
             <select id="region" name="region">
                 <option value="">ရွေးချယ်ပါ...</option>
@@ -146,7 +146,7 @@
             </div>
         </div>
         
-        <div class="form-step active" id="step2">
+        <div class="form-step" id="step2">
             <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
             <div class="fancy-checkbox-group">
                 <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
@@ -439,7 +439,7 @@ if (firstStep) {
 }
 
 function gotoKoBo() {
-    window.location.href = "[https://ee.kobotoolbox.org/x/n0tgNJwm](https://ee.kobotoolbox.org/x/n0tgNJwm)";
+    window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
 }
 
 // VPN Detect
