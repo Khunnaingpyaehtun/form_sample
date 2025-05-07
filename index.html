@@ -49,7 +49,15 @@
             border-radius: 8px;
             font-size: 14px;
         }
-        textarea { resize: vertical; margin-bottom: 25px; }
+        textarea { width: 100%; /* Parent container ရဲ့ အကျယ်အပြည့်ယူပါ */
+    padding: 12px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    resize: vertical;
+    padding-right: 12px; /* ညာဘက် အတွင်းဘောင်နေရာ */
+    box-sizing: border-box}
         .form-step { display: none; }
         .form-step.active { display: block; }
         .fancy-checkbox-group {
