@@ -111,7 +111,7 @@
     <div class="logo-container">
         <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/Logo.png" alt="Logo">
     </div>
-    <h2>Myanmar Emergency Relief Assessment</h2>
+    <h2>Emergency Need Assessment</h2>
     <form id="needForm">
         <div class="form-step active" id="step1">
             <label for="region">တိုင်း/ပြည်နယ်</label>
@@ -131,7 +131,7 @@
                 <option value="မွန်ပြည်နယ်">မွန်ပြည်နယ်</option>
                 <option value="ရခိုင်ပြည်နယ်">ရခိုင်ပြည်နယ်</option>
                 <option value="ရှမ်းပြည်နယ်">ရှမ်းပြည်နယ်</option>
-                <option value="ကယန်းပြည်နယ်">ကယန်းပြည်နယ် (ရှမ်းပြည်နယ်အတွင်း)</option>
+                <option value="ကယားပြည်နယ်">ကယားပြည်နယ်</option>
                 <option value="ပအိုဝ်းကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ">ပအိုဝ်းကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ (ရှမ်းပြည်နယ်အတွင်း)</option>
                 <option value="ဓနုကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ">ဓနုကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ (ရှမ်းပြည်နယ်အတွင်း)</option>
                 <option value="ကိုးကန့်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ">ကိုးကန့်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ (ရှမ်းပြည်နယ်အတွင်း)</option>
@@ -205,13 +205,14 @@
 
 <script>
     const firebaseConfig = {
-        apiKey: "YOUR_API_KEY", // Replace with your actual API key
-        authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // Replace with your actual auth domain
-        databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app", // Replace with your actual database URL
-        projectId: "YOUR_PROJECT_ID", // Replace with your actual project ID
-        messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual messaging sender ID
-        appId: "YOUR_APP_ID", // Replace with your actual app ID
-        measurementId: "YOUR_MEASUREMENT_ID" // Replace with your actual measurement ID (optional)
+        apiKey: "AIzaSyCXJ1cgfJOpnR3fn-ZBYrwbjbMAZik4pEs",
+    authDomain: "mercu-c6dfc.firebaseapp.com",
+    databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "mercu-c6dfc",
+    storageBucket: "mercu-c6dfc.appspot.com",
+    messagingSenderId: "904021728086",
+    appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
+    measurementId: "G-TN8HDENML8"
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
@@ -260,7 +261,7 @@
             "ညောင်ဦးခရိုင်": ["ညောင်ဦး", "ကျောက်ပန်းတောင်း"]
         },
         "ရန်ကုန်တိုင်း": {
-            "ရန်ကုန် အရှေ့ပိုင်းခရိုင်": ["ဗိုလ်တထောင်", "ဒဂုံ", "ပုဇွန်တောင်", "တာမွေ", "မင်္ဂလာတောင်ညွန့်", "အိုက္ကလာပတောင်ပိုင်း", "သင်္ဃန်းကျွန်း", "ဒေါပုံ", "အရှေ့ဒဂုံ", "မြောက်ဒဂုံ", "တောင်ဒဂုံ", "သင်္ဃန်းကျွန်း(တောင်)"],
+            "ရန်ကုန် အရှေ့ပိုင်းခရိုင်": ["ဗိုလ်တထောင်", "ဒဂုံ", "ပုဇွန်တောင်", "တာမွေ", "မင်္ဂလာတောင်ညွန့်", "ဥက္ကလာပတောင်ပိုင်း", "သင်္ဃန်းကျွန်း", "ဒေါပုံ", "အရှေ့ဒဂုံ", "မြောက်ဒဂုံ", "တောင်ဒဂုံ", "သင်္ဃန်းကျွန်း(တောင်)"],
             "ရန်ကုန် အနောက်ပိုင်းခရိုင်": ["အလုံ", "ဒဂုံ", "ပန်းဘဲတန်း", "ကျောက်တံတား", "လသာ", "လမ်းမတော်", "ဆိပ်ကမ်း", "ကြည့်မြင်တိုင်", "စမ်းချောင်း", "ဗဟန်း", "လှိုင်", "ကမာရွတ်"],
             "ရန်ကုန် တောင်ပိုင်းခရိုင်": ["ကျောက်တန်း", "တွံတေး", "ကွမ်းခြံကုန်း", "ဒလ", "ဆိပ်ကြီးခနောင်တို"],
             "ရန်ကုန် မြောက်ပိုင်းခရိုင်": ["အင်းစိန်", "မင်္ဂလာဒုံ", "ရွှေပြည်သာ", "လှိုင်သာယာ", "မှော်ဘီ", "ထန်းတပင်", "တိုက်ကြီး"],
