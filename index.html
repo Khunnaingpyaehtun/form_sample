@@ -144,16 +144,40 @@
 
       <div class="button-group">
         <button type="button" onclick="prevStep()">Back</button>
-        <button type="submit">Submit</button>
+        <button type="button" onclick="nextStep()">Next</button>
         <button class="tiny-redirect-btn" type="button" onclick="gotoKoBo()">
           <img src="https://raw.githubusercontent.com/Khunnaingpyaehtun/form_sample/main/icon.jpeg" alt="Go">
         </button>
       </div>
     </div>
+
+    <div class="form-step" id="step4">
+      <label for="region">တိုင်း/ပြည်နယ်</label>
+      <select id="region" name="region">
+        <option value="">ရွေးချယ်ပါ...</option>
+        <option value="စစ်ကိုင်းတိုင်း">စစ်ကိုင်းတိုင်း</option>
+        <option value="မန္တလေးတိုင်း">မန္တလေးတိုင်း</option>
+        <option value="ရန်ကုန်တိုင်း">ရန်ကုန်တိုင်း</option>
+        </select>
+
+      <label for="district">ခရိုင်/မြို့နယ်</label>
+      <select id="district" name="district" disabled>
+        <option value="">တိုင်း/ပြည်နယ်ကို အရင်ရွေးပါ</option>
+        </select>
+
+      <label for="city">မြို့</label>
+      <select id="city" name="city" disabled>
+        <option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>
+        </select>
+
+      <div class="button-group">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="submit">Submit</button>
+      </div>
+    </div>
   </form>
 </div>
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
@@ -193,18 +217,97 @@
     });
   });
 
-  function nextStep() { showStep(++currentStep); }
-  function prevStep() { showStep(--currentStep); }
-  let currentStep = 1;
-  function showStep(step) {
-    document.querySelectorAll('.form-step').forEach((el, idx) => {
-      el.classList.toggle('active', idx === step - 1);
-    });
-  }
+  const regionSelect = document.getElementById('region');
+  const districtSelect = document.getElementById('district');
+  const citySelect = document.getElementById('city');
 
-  function gotoKoBo() {
-    window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
-  }
+  // တိုင်း/ပြည်နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+  const regionsData = {
+    "စစ်ကိုင်းတိုင်း": ["မုံရွာ", "ရွှေဘို", "ကလေး"],
+    "မန္တလေးတိုင်း": ["မန္တလေး", "ပြင်ဦးလွင်", "ကျောက်ဆည်"],
+    "ရန်ကုန်တိုင်း": ["ရန်ကုန်", "မှော်ဘီ", "ဒဂုံ"]
+    // နောက်ထပ် တိုင်း/ပြည်နယ်များ ထည့်နိုင်ပါတယ်
+  };
+
+  // ခရိုင်/မြို့နယ် ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+  const districtsData = {
+    "စစ်ကိုင်းတိုင်း": {
+      "မုံရွာ": ["မုံရွာ", "အရာတော်"],
+      "ရွှေဘို": ["ရွှေဘို", "တန့်ဆည်"],
+      "ကလေး": ["ကလေး", "ကလေးဝ"]
+    },
+    "မန္တလေးတိုင်း": {
+      "မန္တလေး": ["အောင်မြေသာစံ", "ချမ်းမြသာစည်"],
+      "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်"],
+      "ကျောက်ဆည်": ["ကျောက်ဆည်"]
+    },
+    "ရန်ကုန်တိုင်း": {
+      "ရန်ကုန်": ["လသာ", "ပန်းဘဲတန်း"],
+      "မှော်ဘီ": ["မှော်ဘီ"],
+      "ဒဂုံ": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်း", "ဒဂုံမြို့သစ် တောင်ပိုင်း"]
+    }
+    // နောက်ထပ် ခရိုင်/မြို့နယ်များ ထည့်နိုင်ပါတယ်
+  };
+
+  // မြို့ ဒေတာ (ဒီနေရာမှာ သင့်ရဲ့ တကယ့်ဒေတာနဲ့ အစားထိုးပါ)
+  const citiesData = {
+    "စစ်ကိုင်းတိုင်း": {
+      "မုံရွာ": { "မုံရွာ": ["မုံရွာမြို့"] },
+      "အရာတော်": { "အရာတော်": ["အရာတော်မြို့"] },
+      "ရွှေဘို": { "ရွှေဘို": ["ရွှေဘိုမြို့"] },
+      "တန့်ဆည်": { "တန့်ဆည်": ["တန့်ဆည်မြို့"] },
+      "ကလေး": { "ကလေး": ["ကလေးမြို့"] },
+      "ကလေးဝ": { "ကလေးဝ": ["ကလေးဝမြို့"] }
+    },
+    "မန္တလေးတိုင်း": {
+      "မန္တလေး": { "အောင်မြေသာစံ": ["အောင်မြေသာစံမြို့နယ်"], "ချမ်းမြသာစည်": ["ချမ်းမြသာစည်မြို့နယ်"] },
+      "ပြင်ဦးလွင်": { "ပြင်ဦးလွင်": ["ပြင်ဦးလွင်မြို့"] },
+      "ကျောက်ဆည်": { "ကျောက်ဆည်": ["ကျောက်ဆည်မြို့"] }
+    },
+    "ရန်ကုန်တိုင်း": {
+      "ရန်ကုန်": { "လသာ": ["လသာမြို့နယ်"], "ပန်းဘဲတန်း": ["ပန်းဘဲတန်းမြို့နယ်"] },
+      "မှော်ဘီ": { "မှော်ဘီ": ["မှော်ဘီမြို့"] },
+      "ဒဂုံ": { "ဒဂုံမြို့သစ် အရှေ့ပိုင်း": ["ဒဂုံမြို့သစ် အရှေ့ပိုင်းမြို့နယ်"], "ဒဂုံမြို့သစ် တောင်ပိုင်း": ["ဒဂုံမြို့သစ် တောင်ပိုင်းမြို့နယ်"] }
+    }
+    // နောက်ထပ် မြို့များ ထည့်နိုင်ပါတယ်
+  };
+
+  regionSelect.addEventListener('change', function() {
+    const selectedRegion = this.value;
+    districtSelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
+    citySelect.innerHTML = '<option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>';
+    citySelect.disabled = true;
+
+    if (regionsData[selectedRegion]) {
+      districtsData[selectedRegion] && Object.keys(districtsData[selectedRegion]).forEach(district => {
+        const option = document.createElement('option');
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+      });
+      districtSelect.disabled = false;
+    } else {
+      districtSelect.disabled = true;
+    }
+  });
+
+  districtSelect.addEventListener('change', function() {
+    const selectedRegion = regionSelect.value;
+    const selectedDistrict = this.value;
+    citySelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
+
+    if (districtsData[selectedRegion] && citiesData[selectedRegion] && citiesData[selectedRegion][selectedDistrict]) {
+      citiesData[selectedRegion][selectedDistrict] && Object.keys(citiesData[selectedRegion][selectedDistrict]).forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        citySelect.appendChild(option);
+      });
+      citySelect.disabled = false;
+    } else {
+      citySelect.disabled = true;
+    }
+  });
 
   document.getElementById('needForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -213,6 +316,9 @@
     const situation = document.getElementById("situation").value;
     const detail = document.getElementById("detail").value;
     const file = document.getElementById("fileUpload").files[0];
+    const region = document.getElementById("region").value;
+    const district = document.getElementById("district").value;
+    const city = document.getElementById("city").value;
 
     let fileUrl = "";
     if (file) {
@@ -227,12 +333,15 @@
       detail,
       fileUrl,
       location: { latitude, longitude },
+      region,
+      district,
+      city,
       submittedAt: new Date().toISOString()
     };
 
     db.ref("submissions").push(data)
       .then(() => {
-        alert("Data + File + Location Save Firebase Successfully ✅");
+        alert("Data + File + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
         document.getElementById("needForm").reset();
         showStep(1);
       })
@@ -241,6 +350,31 @@
         alert("Save Failed ❌");
       });
   });
+
+  function nextStep() {
+    if (currentStep < document.querySelectorAll('.form-step').length) {
+      showStep(++currentStep);
+    }
+  }
+
+  function prevStep() {
+    if (currentStep > 1) {
+      showStep(--currentStep);
+    }
+  }
+
+  let currentStep = 1;
+  function showStep(step) {
+    document.querySelectorAll('.form-step').forEach((el, idx) => {
+      el.classList.toggle('active', idx === step - 1);
+    });
+  }
+
+  showStep(currentStep);
+
+  function gotoKoBo() {
+    window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
+  }
 
   // VPN Detect
   fetch("https://ipapi.co/json/")
