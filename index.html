@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Earthquake Relief Assessment</title>
+    <title>Myanmar Emergency Relief Assessment</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -105,46 +105,7 @@
     </div>
     <h2>Smart Earthquake Relief Assessment</h2>
     <form id="needForm">
-        <div class="form-step active" id="step1">
-            <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
-            <div class="fancy-checkbox-group">
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
-                <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
-            </div>
-            <div class="button-group">
-                <span></span>
-                <button type="button" onclick="nextStep()">Next</button>
-            </div>
-        </div>
-
-        <div class="form-step" id="step2">
-            <label for="situation">လက်ရှိအခြေအနေ</label>
-            <select id="situation" name="situation">
-                <option value="">ရွေးချယ်ပါ...</option>
-                <option value="1">အရေးတကြီး လိုအပ်</option>
-                <option value="2">အလွန်လိုအပ်</option>
-                <option value="3">လိုအပ်</option>
-            </select>
-            <div class="button-group">
-                <button type="button" onclick="prevStep()">Back</button>
-                <button type="button" onclick="nextStep()">Next</button>
-            </div>
-        </div>
-
-        <div class="form-step" id="step3">
-            <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
-            <textarea id="detail" name="detail" rows="4"></textarea>
-            <div class="button-group">
-                <button type="button" onclick="prevStep()">Back</button>
-                <button type="button" onclick="nextStep()">Next</button>
-            </div>
-        </div>
-
-        <div class="form-step" id="step4">
+        <div class="form-step" id="step1">
             <label for="region">တိုင်း/ပြည်နယ်</label>
             <select id="region" name="region">
                 <option value="">ရွေးချယ်ပါ...</option>
@@ -179,7 +140,46 @@
             <select id="city" name="city" disabled>
                 <option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>
             </select>
+            
+        </div>
+        
+        <div class="form-step active" id="step2">
+            <label>လိုအပ်ချက်များ (ရွေးချယ်ပါ)</label>
+            <div class="fancy-checkbox-group">
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="စားနပ်ရိက္ခာ"><span>စားနပ်ရိက္ခာ</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ရေ"><span>ရေ</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="သန့်ရှင်းရေး"><span>သန့်ရှင်းရေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ဆေးဝါးနှင့်ကျန်းမာရေး"><span>ဆေးဝါးနှင့်ကျန်းမာရေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
+                <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
+            </div>
+            <div class="button-group">
+                <span></span>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
 
+        <div class="form-step" id="step3">
+            <label for="situation">လက်ရှိအခြေအနေ</label>
+            <select id="situation" name="situation">
+                <option value="">ရွေးချယ်ပါ...</option>
+                <option value="1">အရေးတကြီး လိုအပ်</option>
+                <option value="2">အလွန်လိုအပ်</option>
+                <option value="3">လိုအပ်</option>
+            </select>
+            <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
+        </div>
+
+        <div class="form-step" id="step4">
+            <label for="detail">အသေးစိတ်ဖော်ပြချက်</label>
+            <textarea id="detail" name="detail" rows="4"></textarea>
+            <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
             <div class="button-group">
                 <button type="button" onclick="prevStep()">Back</button>
                 <button type="submit">Submit</button>
@@ -190,6 +190,8 @@
         </div>
     </form>
 </div>
+
+        
 
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
