@@ -196,13 +196,13 @@
 
 <script>
     const firebaseConfig = {
-        apiKey: "AIzaSyCXJ1cgfJOpnR3fn-ZBYrwbjbMAZik4pEs",
-        authDomain: "mercu-c6dfc.firebaseapp.com",
-        databaseURL: "https://mercu-c6dfc-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "mercu-c6dfc",
-        messagingSenderId: "904021728086",
-        appId: "1:904021728086:web:d9b2f82b58c3e0e44394f7",
-        measurementId: "G-TN8HDENML8"
+        apiKey: "YOUR_API_KEY", // Replace with your actual API key
+        authDomain: "YOUR_PROJECT_ID.firebaseapp.com", // Replace with your actual auth domain
+        databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app", // Replace with your actual database URL
+        projectId: "YOUR_PROJECT_ID", // Replace with your actual project ID
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // Replace with your actual messaging sender ID
+        appId: "YOUR_APP_ID", // Replace with your actual app ID
+        measurementId: "YOUR_MEASUREMENT_ID" // Replace with your actual measurement ID (optional)
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
@@ -273,189 +273,185 @@
             "ပုသိမ်ခရိုင်": ["ပုသိမ်", "ငသိုင်းချောင်း", "ကျုံပျော်", "ကန်ကြီးထောင့်"],
             "မြောင်းမြခရိုင်": ["မြောင်းမြ", "အိမ်မဲ", "ဝါးခယ်မ"],
             "မအူပင်ခရိုင်": ["မအူပင်", "ဒေးဒရဲ", "ပန်းတနော်"],
-            "ဟင်္သာတခရိုင်": ["ဟင်္သာတ", "ဇလွန်", "လေးမျက်နှာ", "မြန်အောင်"],
-            "ကျုံပျော်ခရိုင်": ["ကျုံပျော်", "မော်လမြိုင်ကျွန်း"],
-            "ဖျာပုံခရိုင်": ["ဖျာပုံ", "ဘိုကလေး"]
-        },
-        "တနင်္သာရီတိုင်း": {
-            "ထားဝယ်ခရိုင်": ["ထားဝယ်", "လောင်းလုံး", "သရက်ချောင်း"],
-            "မြိတ်ခရိုင်": ["မြိတ်", "ပုလော", "တနင်္သာရီ"],
-            "ကော့သောင်းခရိုင်": ["ကော့သောင်း", "ဘုတ်ပြင်း"]
-        },
-        "ကချင်ပြည်နယ်": {
-            "မြစ်ကြီးနားခရိုင်": ["မြစ်ကြီးနား", "ဝိုင်းမော်", "ဖားကန့်", "ဆွမ်ပရာဘွမ်"],
-            "ဗန်းမော်ခရိုင်": ["ဗန်းမော်", "မံစီ", "ရွှေကူ", "မိုးမောက်"],
-            "ပူတာအိုခရိုင်": ["ပူတာအို", "နောင်မွန်", "ခေါင်လန်ဖူး", "မချမ်းဘော", "ဆောလော်"]
-        },
-        "ကယားပြည်နယ်": {
-            "လွိုင်ကော်ခရိုင်": ["လွိုင်ကော်", "ဒီးမော့ဆို", "ဖရူဆို", "ဘောလခဲ", "ရှားတော", "ဖားဆောင်း"]
-        },
-        "ကရင်ပြည်နယ်": {
-            "ဘားအံခရိုင်": ["ဘားအံ", "လှိုင်းဘွဲ့", "သံတောင်ကြီး"],
-            "မြဝတီခရိုင်": ["မြဝတီ"],
-            "ကော့ကရိတ်ခရိုင်": ["ကော့ကရိတ်"],
-            "သံတောင်ကြီးခရိုင်": ["သံတောင်"]
-        },
-        "ချင်းပြည်နယ်": {
-            "ဖလမ်းခရိုင်": ["ဖလမ်း", "တွန်းဇံ", "ရိခေါင်ဒါရ်"],
-            "ဟားခါးခရိုင်": ["ဟားခါး", "ထန်တလန်"],
-            "မင်းတပ်ခရိုင်": ["မင်းတပ်", "ကန်ပက်လက်", "မတူပီ"]
-        },
-        "မွန်ပြည်နယ်": {
-            "မော်လမြိုင်ခရိုင်": ["မော်လမြိုင်", "ချောင်းဆုံ", "မုဒုံ", "သံဖြူဇရပ်"],
-            "သထုံခရိုင်": ["သထုံ", "ပိုင်ကျုံ", "ဘီးလင်း", "ကျိုက်ထို"]
-        },
-        "ရခိုင်ပြည်နယ်": {
-            "စစ်တွေခရိုင်": ["စစ်တွေ", "ပေါက်တော", "ရသေ့တောင်"],
-            "ဘူးသီးတောင်ခရိုင်": ["ဘူးသီးတောင်", "မောင်တော"],
-            "ကျောက်ဖြူခရိုင်": ["ကျောက်ဖြူ", "အမ်း", "ရမ်းဗြဲ"],
-            "သံတွဲခရိုင်": ["သံတွဲ", "ဂွ", "တောင်ကုတ်", "မာန်အောင်"]
-        },
-        "ရှမ်းပြည်နယ်": {
-            "တောင်ကြီးခရိုင်": ["တောင်ကြီး", "ညောင်ရွှေ", "ဟိုပုံး", "ဆီဆိုင်", "ပင်လောင်း", "ဖယ်ခုံ"],
-            "လွိုင်လင်ခရိုင်": ["လွိုင်လင်", "နမ့်စန်", "ကျေးသီး", "မိုင်းကိုင်", "ကွန်ဟိန်း", "လင်းခေး", "မိုးနဲ", "လဲချား", "မိုင်းပန်"],
-            "ကျိုင်းတုံခရိုင်": ["ကျိုင်းတုံ", "မိုင်းဖြတ်", "မိုင်းလား", "မိုင်းယောင်း", "မိုင်းခတ်", "မိုင်းဆတ်"],
-            "လားရှိုးခရိုင်": ["လားရှိုး", "သိန္နီ", "မိုးမိတ်", "နမ့်ခမ်း", "ကွတ်ခိုင်", "မူဆယ်", "နမ့်တူ"],
-            "တာချီလိတ်ခရိုင်": ["တာချီလိတ်", "မိုင်းဖြတ်(တောင်ပိုင်း)", "မိုင်းယောင်း(တောင်ပိုင်း)"]
-        },
-        "ကယန်းပြည်နယ်": {
-            "လွိုင်ကော်ခရိုင်": ["ဖရူဆို", "ရှားတော"]
-        },
-        "ပအိုဝ်းကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
-            "တောင်ကြီးခရိုင်": ["ဟိုပုံး", "ဆီဆိုင်", "ပင်လောင်း"]
-        },
-        "ဓနုကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
-            "တောင်ကြီးခရိုင်": ["ရွာငံ", "ပင်းတယ"]
-        },
-        "ကိုးကန့်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
-            "လားရှိုးခရိုင်": ["လောက်ကိုင်", "ကွမ်းလုံ"]
-        },
-        "ဝကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရတိုင်း": {
-            "လားရှိုးခရိုင်": ["ဟိုပန်", "မိုင်းမော", "ပန်ဆန်း(ပန်ခမ်း)"]
-        },
-        "ပလောင်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
-            "လားရှိုးခရိုင်": ["နမ့်ဆန်", "မန်တုံ", "နမ့်ပိန်း"]
-        }
+"ဟင်္သာတခရိုင်": ["ဟင်္သာတ", "ဇလွန်", "လေးမျက်နှာ", "မြန်အောင်"],
+"ကျုံပျော်ခရိုင်": ["ကျုံပျော်", "မော်လမြိုင်ကျွန်း"],
+"ဖျာပုံခရိုင်": ["ဖျာပုံ", "ဘိုကလေး"]
+},
+"တနင်္သာရီတိုင်း": {
+"ထားဝယ်ခရိုင်": ["ထားဝယ်", "လောင်းလုံး", "သရက်ချောင်း"],
+"မြိတ်ခရိုင်": ["မြိတ်", "ပုလော", "တနင်္သာရီ"],
+"ကော့သောင်းခရိုင်": ["ကော့သောင်း", "ဘုတ်ပြင်း"]
+},
+"ကချင်ပြည်နယ်": {
+"မြစ်ကြီးနားခရိုင်": ["မြစ်ကြီးနား", "ဝိုင်းမော်", "ဖားကန့်", "ဆွမ်ပရာဘွမ်"],
+"ဗန်းမော်ခရိုင်": ["ဗန်းမော်", "မံစီ", "ရွှေကူ", "မိုးမောက်"],
+"ပူတာအိုခရိုင်": ["ပူတာအို", "နောင်မွန်", "ခေါင်လန်ဖူး", "မချမ်းဘော", "ဆောလော်"]
+},
+"ကယားပြည်နယ်": {
+"လွိုင်ကော်ခရိုင်": ["လွိုင်ကော်", "ဒီးမော့ဆို", "ဖရူဆို", "ဘောလခဲ", "ရှားတော", "ဖားဆောင်း"]
+},
+"ကရင်ပြည်နယ်": {
+"ဘားအံခရိုင်": ["ဘားအံ", "လှိုင်းဘွဲ့", "သံတောင်ကြီး"],
+"မြဝတီခရိုင်": ["မြဝတီ"],
+"ကော့ကရိတ်ခရိုင်": ["ကော့ကရိတ်"],
+"သံတောင်ကြီးခရိုင်": ["သံတောင်"]
+},
+"ချင်းပြည်နယ်": {
+"ဖလမ်းခရိုင်": ["ဖလမ်း", "တွန်းဇံ", "ရိခေါင်ဒါရ်"],
+"ဟားခါးခရိုင်": ["ဟားခါး", "ထန်တလန်"],
+"မင်းတပ်ခရိုင်": ["မင်းတပ်", "ကန်ပက်လက်", "မတူပီ"]
+},
+"မွန်ပြည်နယ်": {
+"မော်လမြိုင်ခရိုင်": ["မော်လမြိုင်", "ချောင်းဆုံ", "မုဒုံ", "သံဖြူဇရပ်"],
+"သထုံခရိုင်": ["သထုံ", "ပိုင်ကျုံ", "ဘီးလင်း", "ကျိုက်ထို"]
+},
+"ရခိုင်ပြည်နယ်": {
+"စစ်တွေခရိုင်": ["စစ်တွေ", "ပေါက်တော", "ရသေ့တောင်"],
+"ဘူးသီးတောင်ခရိုင်": ["ဘူးသီးတောင်", "မောင်တော"],
+"ကျောက်ဖြူခရိုင်": ["ကျောက်ဖြူ", "အမ်း", "ရမ်းဗြဲ"],
+"သံတွဲခရိုင်": ["သံတွဲ", "ဂွ", "တောင်ကုတ်", "မာန်အောင်"]
+},
+"ရှမ်းပြည်နယ်": {
+"တောင်ကြီးခရိုင်": ["တောင်ကြီး", "ညောင်ရွှေ", "ဟိုပုံး", "ဆီဆိုင်", "ပင်လောင်း", "ဖယ်ခုံ"],
+"လွိုင်လင်ခရိုင်": ["လွိုင်လင်", "နမ့်စန်", "ကျေးသီး", "မိုင်းကိုင်", "ကွန်ဟိန်း", "လင်းခေး", "မိုးနဲ", "လဲချား", "မိုင်းပန်"],
+"ကျိုင်းတုံခရိုင်": ["ကျိုင်းတုံ", "မိုင်းဖြတ်", "မိုင်းလား", "မိုင်းယောင်း", "မိုင်းခတ်", "မိုင်းဆတ်"],
+"လားရှိုးခရိုင်": ["လားရှိုး", "သိန္နီ", "မိုးမိတ်", "နမ့်ခမ်း", "ကွတ်ခိုင်", "မူဆယ်", "နမ့်တူ"],
+"တာချီလိတ်ခရိုင်": ["တာချီလိတ်", "မိုင်းဖြတ်(တောင်ပိုင်း)", "မိုင်းယောင်း(တောင်ပိုင်း)"]
+},
+"ကယန်းပြည်နယ်": {"လွိုင်ကော်ခရိုင်": ["ဖရူဆို", "ရှားတော"]
+},
+"ပအိုဝ်းကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {"တောင်ကြီးခရိုင်": ["ဟိုပုံး", "ဆီဆိုင်", "ပင်လောင်း"]
+},
+"ဓနုကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
+"တောင်ကြီးခရိုင်": ["ရွာငံ", "ပင်းတယ"]
+},
+"ကိုးကန့်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
+"လားရှိုးခရိုင်": ["လောက်ကိုင်", "ကွမ်းလုံ"]
+},
+"ဝကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရတိုင်း": {
+"လားရှိုးခရိုင်": ["ဟိုပန်", "မိုင်းမော", "ပန်ဆန်း(ပန်ခမ်း)"]
+},
+"ပလောင်ကိုယ်ပိုင်အုပ်ချုပ်ခွင့်ရဒေသ": {
+"လားရှိုးခရိုင်": ["နမ့်ဆန်", "မန်တုံ", "နမ့်ပိန်း"]
+}
+};regionSelect.addEventListener('change', function() {
+    const selectedRegion = this.value;
+    districtSelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
+    citySelect.innerHTML = '<option value="">မြို့နယ်ကို ရွေးပါ...</option>';
+    citySelect.disabled = true;
+
+    if (regionsData[selectedRegion]) {
+        const districts = Object.keys(regionsData[selectedRegion]);
+        districts.forEach(district => {
+            const option = document.createElement('option');
+            option.value = district;
+            option.textContent = district;
+            districtSelect.appendChild(option);
+        });
+        districtSelect.disabled = false;
+    } else {
+        districtSelect.disabled = true;
+    }
+});
+
+districtSelect.addEventListener('change', function() {
+    const selectedRegion = regionSelect.value;
+    const selectedDistrict = this.value;
+    citySelect.innerHTML = '<option value="">မြို့နယ်ကို ရွေးပါ...</option>';
+
+    if (regionsData[selectedRegion] && regionsData[selectedRegion][selectedDistrict]) {
+        const townships = regionsData[selectedRegion][selectedDistrict];
+        townships.forEach(township => {
+            const option = document.createElement('option');
+            option.value = township;
+            option.textContent = township;
+            citySelect.appendChild(option);
+        });
+        citySelect.disabled = false;
+    } else {
+        citySelect.disabled = true;
+    }
+});
+
+document.getElementById('needForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
+    const situation = document.getElementById("situation").value;
+    const detail = document.getElementById("detail").value;
+    const region = document.getElementById("region").value;
+    const district = document.getElementById("district").value;
+    const city = document.getElementById("city").value;
+
+    const data = {
+        needs,
+        situation,
+        detail,
+        location: { latitude, longitude },
+        region,
+        district,
+        city,
+        submittedAt: new Date().toISOString()
     };
 
-    regionSelect.addEventListener('change', function() {
-        const selectedRegion = this.value;
-        districtSelect.innerHTML = '<option value="">ရွေးချယ်ပါ...</option>';
-        citySelect.innerHTML = '<option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>';
-        citySelect.disabled = true;
-
-        if (regionsData[selectedRegion]) {
-            const districts = Object.keys(regionsData[selectedRegion]);
-            districts.forEach(district => {
-                const option = document.createElement('option');
-                option.value = district;
-                option.textContent = district;
-                districtSelect.appendChild(option);
-            });
-            districtSelect.disabled = false;
-        } else {
-            districtSelect.disabled = true;
-        }
-    });
-
-    districtSelect.addEventListener('change', function() {
-        const selectedRegion = regionSelect.value;
-        const selectedDistrict = this.value;
-        citySelect.innerHTML = '<option value="">မြို့နယ်ကို ရွေးပါ...</option>';
-
-        if (regionsData[selectedRegion] && regionsData[selectedRegion][selectedDistrict]) {
-            const townships = regionsData[selectedRegion][selectedDistrict];
-            townships.forEach(township => {
-                const option = document.createElement('option');
-                option.value = township;
-                option.textContent = township;
-                citySelect.appendChild(option);
-            });
-            citySelect.disabled = false;
-        } else {
-            citySelect.disabled = true;
-        }
-    });
-
-    document.getElementById('needForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const needs = Array.from(document.querySelectorAll("input[name='needs[]']:checked")).map(el => el.value);
-        const situation = document.getElementById("situation").value;
-        const detail = document.getElementById("detail").value;
-        const region = document.getElementById("region").value;
-        const district = document.getElementById("district").value;
-        const city = document.getElementById("city").value;
-
-        const data = {
-            needs,
-            situation,
-            detail,
-            location: { latitude, longitude },
-            region,
-            district,
-            city,
-            submittedAt: new Date().toISOString()
-        };
-
-        db.ref("submissions").push(data)
-            .then(() => {
-                alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
-                document.getElementById("needForm").reset();
-                showStep(1);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("Save Failed ❌");
-            });
-    });
-
-    let currentStep = 1;
-    function showStep(step) {
-        document.querySelectorAll('.form-step').forEach((el, idx) => {
-            el.classList.toggle('active', idx === step - 1);
-        });
-    }
-
-    function nextStep() {
-        const currentStepElement = document.querySelector('.form-step.active');
-        const nextStepElement = currentStepElement.nextElementSibling;
-        if (nextStepElement && nextStepElement.classList.contains('form-step')) {
-            currentStepElement.classList.remove('active');
-            nextStepElement.classList.add('active');
-        }
-    }
-
-    function prevStep() {
-        const currentStepElement = document.querySelector('.form-step.active');
-        const prevStepElement = currentStepElement.previousElementSibling;
-        if (prevStepElement && prevStepElement.classList.contains('form-step')) {
-            currentStepElement.classList.remove('active');
-            prevStepElement.classList.add('active');
-        }
-    }
-
-    // ပထမဆုံး Step ကို စတင်ပြသရန်
-    const firstStep = document.getElementById('step1');
-    if (firstStep) {
-        firstStep.classList.add('active');
-    }
-
-    function gotoKoBo() {
-        window.location.href = "https://ee.kobotoolbox.org/x/n0tgNJwm";
-    }
-
-    // VPN Detect
-    fetch("https://ipapi.co/json/")
-        .then(res => res.json())
-        .then(data => {
-            if (!["Myanmar", "Thailand"].includes(data.country_name)) {
-                alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
-                window.location.href = "https://google.com";
-            }
+    db.ref("submissions").push(data)
+        .then(() => {
+            alert("Data + Location + မြို့နယ်အချက်အလက်များ Firebase သို့ အောင်မြင်စွာ သိမ်းဆည်းပြီးပါပြီ ✅");
+            document.getElementById("needForm").reset();
+            showStep(1);
         })
-        .catch(() => console.warn("VPN check failed"));
-</script>
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Save Failed ❌");
+        });
+});
+
+let currentStep = 1;
+function showStep(step) {
+    document.querySelectorAll('.form-step').forEach((el, idx) => {
+        el.classList.toggle('active', idx === step - 1);
+    });
+}
+
+function nextStep() {
+    const currentStepElement = document.querySelector('.form-step.active');
+    const nextStepElement = currentStepElement.nextElementSibling;
+    if (nextStepElement && nextStepElement.classList.contains('form-step')) {
+        currentStepElement.classList.remove('active');
+        nextStepElement.classList.add('active');
+    }
+}
+
+function prevStep() {
+    const currentStepElement = document.querySelector('.form-step.active');
+    const prevStepElement = currentStepElement.previousElementSibling;
+    if (prevStepElement && prevStepElement.classList.contains('form-step')) {
+        currentStepElement.classList.remove('active');
+        prevStepElement.classList.add('active');
+    }
+}
+
+// ပထမဆုံး Step ကို စတင်ပြသရန်
+const firstStep = document.getElementById('step1');
+if (firstStep) {
+    firstStep.classList.add('active');
+}
+
+function gotoKoBo() {
+    window.location.href = "[https://ee.kobotoolbox.org/x/n0tgNJwm](https://ee.kobotoolbox.org/x/n0tgNJwm)";
+}
+
+// VPN Detect
+fetch("[https://ipapi.co/json/](https://ipapi.co/json/)")
+    .then(res => res.json())
+    .then(data => {
+        if (!["Myanmar", "Thailand"].includes(data.country_name)) {
+            alert("VPN သုံးနေပါတယ်။ VPN ပိတ်ပါ။");
+            window.location.href = "[https://google.com](https://google.com)";
+        }
+    })
+    .catch(() => console.warn("VPN check failed"));
+    </script>
 
 </body>
 </html>
