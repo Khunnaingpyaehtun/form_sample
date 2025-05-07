@@ -140,7 +140,10 @@
             <select id="city" name="city" disabled>
                 <option value="">ခရိုင်/မြို့နယ်ကို အရင်ရွေးပါ</option>
             </select>
-            
+               <div class="button-group">
+                <span></span>
+                <button type="button" onclick="nextStep()">Next</button>
+            </div>
         </div>
         
         <div class="form-step active" id="step2">
@@ -153,8 +156,8 @@
                 <label class="fancy-option"><input type="checkbox" name="needs[]" value="ငွေကြေး"><span>ငွေကြေး</span></label>
                 <label class="fancy-option"><input type="checkbox" name="needs[]" value="အမိုးအကာ"><span>အမိုးအကာ</span></label>
             </div>
-            <div class="button-group">
-                <span></span>
+         <div class="button-group">
+                <button type="button" onclick="prevStep()">Back</button>
                 <button type="button" onclick="nextStep()">Next</button>
             </div>
         </div>
